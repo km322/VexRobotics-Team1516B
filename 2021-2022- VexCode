@@ -1,0 +1,266 @@
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       VEX                                                       */
+/*    Created:      Thu Sep 26 2019                                           */
+/*    Description:  Competition Template                                      */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+#include "vex.h"
+
+using namespace vex;
+
+// A global instance of competition
+competition Competition;
+
+vex::motor  leftSide = vex::motor( vex:: PORT16);
+vex::motor  rightSide = vex::motor( vex:: PORT17,true);
+vex::motor  strafe = vex::motor( vex:: PORT18,true);
+
+//VCB
+vex::motor  rings = vex::motor( vex:: PORT15,true);
+
+
+//Setting up the controller
+
+vex::controller Yeetroller = vex::controller();
+
+// define your global instances of motors and other devices here
+
+
+
+int runoff(int parameter) {
+  if (parameter > 100){
+    parameter = 100;
+  }
+  else if (parameter < -100){
+    parameter = -100;
+  }
+  return parameter;
+}
+
+
+
+
+
+int overFlow(int input){
+  if (input < 30 && input > 0){
+    input = 0;
+  } else if (input > -30 && input < 0){
+    input = 0;
+  }
+  return input;
+}
+
+
+
+
+int average(int input1, int input2){
+  return (input1+input2)/2;
+}
+
+
+
+// void moveForward(float rotations){
+//   int degrees = rotations*360;
+//   leftSide.startRotateFor(vex::directionType::fwd, degrees, vex::rotationUnits::deg);
+//   rightSide.startRotateFor(vex::directionType::fwd, degrees, vex::rotationUnits::deg);
+// }
+
+// void turnRight(float num){
+//   int degrees = num;
+//   leftSide.startRotateFor(vex::directionType::fwd, degrees, vex::rotationUnits::deg);
+//   rightSide.startRotateFor(vex::directionType::rev, degrees, vex::rotationUnits::deg);
+// }
+
+// void turnLeft(float num){
+//   int degrees = num;
+//   leftSide.startRotateFor(vex::directionType::rev, degrees, vex::rotationUnits::deg);
+//   rightSide.startRotateFor(vex::directionType::fwd, degrees, vex::rotationUnits::deg);
+// }
+
+
+// void ballIn(){
+//   RightIntake.startRotateFor(vex::directionType::fwd, 1080, vex::rotationUnits::deg);
+//   LeftIntake.rotateFor(vex::directionType::fwd, 1080, vex::rotationUnits::deg);
+//   vcb.rotateFor(vex::directionType::fwd, 5*360, vex::rotationUnits::deg);
+//   wait(1,seconds);
+//   shell.rotateFor(vex::directionType::fwd, 8*360, vex::rotationUnits::deg);
+
+
+// }
+
+// void ballOut(){
+//   RightIntake.startRotateFor(vex::directionType::rev, 1080, vex::rotationUnits::deg);
+//   LeftIntake.rotateFor(vex::directionType::rev, 1080, vex::rotationUnits::deg);
+//   vcb.rotateFor(vex::directionType::rev, 5*360, vex::rotationUnits::deg);
+//   shell.rotateFor(vex::directionType::rev, 8*360, vex::rotationUnits::deg);
+
+// }
+
+
+// void intake(){
+//   rings.startRotateFor(vex::directionType::fwd, 1080, vex::rotationUnits::deg);
+// }
+
+// void outake(){
+//   rings.startRotateFor(vex::directionType::rev, 1080, vex::rotationUnits::deg);
+// }
+
+
+/*---------------------------------------------------------------------------*/
+/*                          Pre-Autonomous Functions                         */
+/*                                                                           */
+/*  You may want to perform some actions before the competition starts.      */
+/*  Do them in the following function.  You must return from this function   */
+/*  or the autonomous and usercontrol tasks will not be started.  This       */
+/*  function is only called once after the V5 has been powered on and        */
+/*  not every time that the robot is disabled.                               */
+/*---------------------------------------------------------------------------*/
+
+void pre_auton(void) {
+  // Initializing Robot Configuration. DO NOT REMOVE!
+  vexcodeInit();
+
+  // All activities that occur before the competition starts
+  // Example: clearing encoders, setting servo positions, ...
+}
+
+/*---------------------------------------------------------------------------*/
+/*                                                                           */
+/*                              Autonomous Task                              */
+/*                                                                           */
+/*  This task is used to control your robot during the autonomous phase of   */
+/*  a VEX Competition.                                                       */
+/*                                                                           */
+/*  You must modify the code to add your own robot specific commands here.   */
+/*---------------------------------------------------------------------------*/
+
+void autonomous(void) {
+  // ..........................................................................
+  // Insert autonomous user code here.
+  // ..........................................................................
+  // intake();
+  // ballIn();
+  // turnRight(4*360);
+  // turnRight((3*360)+1);
+  // moveForward(6.66);
+  // intake();
+  // turnLeft(360);
+  // ballIn();
+  // ballOut();
+}
+
+/*---------------------------------------------------------------------------*/
+/*                                                                           */
+/*                              User Control Task                            */
+/*                                                                           */
+/*  This task is used to control your robot during the user control phase of */
+/*  a VEX Competition.                                                       */
+/*                                                                           */
+/*  You must modify the code to add your own robot specific commands here.   */
+/*---------------------------------------------------------------------------*/
+
+void usercontrol(void) {
+  int vcbSpeed = 100;
+
+  int intakeSpeed = 100;
+  // User control code here, inside the loop
+  while (1) {
+    int leftForward = Yeetroller.Axis3.position();
+    int leftSideways = Yeetroller.Axis4.position();
+    int rightSideways = Yeetroller.Axis1.position();  
+
+
+
+    // int LT = leftForward + rightSideways;
+    // LT = runoff(LT);
+    // LT = overFlow(LT);
+    int middle = leftSideways;
+    middle = runoff(middle);
+    middle = overFlow(middle);
+    int lefto = leftForward + rightSideways;
+    lefto = runoff(lefto);
+    lefto = overFlow(lefto);
+    int righto = leftForward - rightSideways;
+    righto = runoff(righto);
+    righto = overFlow(righto);
+    
+
+
+
+
+
+
+    
+    leftSide.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
+    rightSide.spin(vex::directionType::fwd, righto, vex::velocityUnits::pct);
+    strafe.spin(vex::directionType::fwd, middle, vex::velocityUnits::pct);
+    // rightTopDriveMotor.spin(vex::directionType::fwd, RT, vex::velocityUnits::pct);
+
+    //Intakes Program
+
+
+    //If Button 1 is pressed, the Intakes will move inwards
+    // if (Yeetroller.ButtonR1.pressing() ) {
+    //   LeftIntake.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+    //   RightIntake.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+    //   vcb.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
+    // }
+    // //If Button 2 is pressed, the intakes will move outwards
+    // else if (Yeetroller.ButtonR2.pressing()){
+    //   LeftIntake.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
+    //   RightIntake.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
+    //   vcb.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+    // }
+    // //If nothing is pressed, the intakes will stay stationary
+    // else {
+    //   LeftIntake.stop(vex::brakeType::brake);
+    //   RightIntake.stop(vex::brakeType::brake);
+    //   vcb.stop(vex::brakeType::brake);
+    // }
+
+
+
+
+    //shell Program:
+
+    //If Button 3 is pressed, the vcb will move forward
+    if (Yeetroller.ButtonL1.pressing()) {
+      rings.spin(vex::directionType::rev, vcbSpeed, vex::velocityUnits::pct);
+    }
+    //If Button 3 is pressed, the vcb will move in the opposite direction
+    else if (Yeetroller.ButtonL2.pressing()) {
+      rings.spin(vex::directionType::fwd, vcbSpeed, vex::velocityUnits::pct);
+    }
+    //If nothing is pressed, the vcb will stay stationary
+    else {
+      rings.stop(vex::brakeType::brake);
+    }
+    wait(20, msec); // Sleep the task for a short amount of time to
+                    // prevent wasted resources.
+  }
+}
+
+//
+// Main will set up the competition functions and callbacks.
+//
+int main() {
+  // Set up callbacks for autonomous and driver control periods.
+  Competition.autonomous(autonomous);
+  Competition.drivercontrol(usercontrol);
+
+  // Run the pre-autonomous function.
+  pre_auton();
+
+  // Prevent main from exiting with an infinite loop.
+  while (true) {
+    wait(100, msec);
+  }
+}
