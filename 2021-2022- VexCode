@@ -19,9 +19,9 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
+//Drivetrain
 vex::motor  leftSide = vex::motor( vex:: PORT16);
 vex::motor  rightSide = vex::motor( vex:: PORT17,true);
-//vex::motor  strafe = vex::motor( vex:: PORT18,true); -->
 
 //Ring Lift 
 vex::motor  rings = vex::motor( vex:: PORT15,true);
@@ -157,6 +157,7 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
+  rings.setVelocity(100, vex::velocityUnits::pct);
   rings.rotateFor(vex::directionType::fwd, 20000, vex::rotationUnits::deg);
   // intake();
   // ballIn();
@@ -209,15 +210,15 @@ void usercontrol(void) {
     if (Yeetroller.ButtonR1.pressing() ) {
       lgoal.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
       rgoal.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
-      lwrist.spin(vex::directionType::fwd, 10, vex::velocityUnits::pct);
-      rwrist.spin(vex::directionType::rev, 10, vex::velocityUnits::pct);
+      lwrist.spin(vex::directionType::fwd, 1, vex::velocityUnits::pct);
+      rwrist.spin(vex::directionType::rev, 1, vex::velocityUnits::pct);
     }
     //Lift Down
     else if (Yeetroller.ButtonR2.pressing()){
       lgoal.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
       rgoal.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
-      lwrist.spin(vex::directionType::rev, 10, vex::velocityUnits::pct);
-      rwrist.spin(vex::directionType::fwd, 10, vex::velocityUnits::pct);
+      lwrist.spin(vex::directionType::rev, 1, vex::velocityUnits::pct);
+      rwrist.spin(vex::directionType::fwd, 1, vex::velocityUnits::pct);
     }
     //If nothing is pressed, the intakes will stay stationary
     else {
