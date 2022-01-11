@@ -19,23 +19,20 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
+//Back Lift
+vex::motor  BackRLift = vex::motor( vex:: PORT4);
+vex::motor  BackLLift = vex::motor( vex:: PORT3,true);
+
+//Front Lift
+vex::motor  FrontRLift = vex::motor( vex:: PORT2,true);
+vex::motor  FrontLLift = vex::motor( vex:: PORT1);
+
 //Drivetrain
-vex::motor  leftSide = vex::motor( vex:: PORT16);
-vex::motor  rightSide = vex::motor( vex:: PORT17,true);
+vex::motor  FrontRDrive = vex::motor( vex:: PORT5,true);
+vex::motor  BackRDrive = vex::motor( vex:: PORT6,true);
+vex::motor  FrontLDrive = vex::motor( vex:: PORT7);
+vex::motor  BackLDrive = vex::motor( vex:: PORT8);
 
-//Ring Lift 
-vex::motor  rings = vex::motor( vex:: PORT15,true);
-
-//lIFT
-vex::motor  lgoal = vex::motor( vex:: PORT14,true);
-vex::motor  rgoal = vex::motor( vex:: PORT13,true);
-
-//Wrist
-vex::motor  lwrist = vex::motor( vex:: PORT18,true);
-vex::motor  rwrist = vex::motor( vex:: PORT20,true);
-
-//Clamp
-vex::motor  Clamp = vex::motor( vex:: PORT19,true);
 
 
 //Setting up the controller
@@ -157,8 +154,6 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-  rings.setVelocity(100, vex::velocityUnits::pct);
-  rings.rotateFor(vex::directionType::fwd, 20000, vex::rotationUnits::deg);
   // intake();
   // ballIn();
   // turnRight(4*360);
@@ -199,8 +194,10 @@ void usercontrol(void) {
     righto = runoff(righto);
     righto = overFlow(righto);
     
-    leftSide.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
-    rightSide.spin(vex::directionType::fwd, righto, vex::velocityUnits::pct);
+    FrontLDrive.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
+    BackLDrive.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
+    FrontRDrive.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
+    BackRDrive.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
     //strafe.spin(vex::directionType::fwd, middle, vex::velocityUnits::pct);
     // rightTopDriveMotor.spin(vex::directionType::fwd, RT, vex::velocityUnits::pct);
 
@@ -208,69 +205,35 @@ void usercontrol(void) {
 
     //Lift Up
     if (Yeetroller.ButtonR1.pressing() ) {
-      lgoal.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
-      rgoal.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
-      lwrist.spin(vex::directionType::fwd, 1, vex::velocityUnits::pct);
-      rwrist.spin(vex::directionType::rev, 1, vex::velocityUnits::pct);
+      FrontLLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+      FrontRLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //Lift Down
     else if (Yeetroller.ButtonR2.pressing()){
-      lgoal.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
-      rgoal.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
-      lwrist.spin(vex::directionType::rev, 1, vex::velocityUnits::pct);
-      rwrist.spin(vex::directionType::fwd, 1, vex::velocityUnits::pct);
+      FrontLLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+      FrontRLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //If nothing is pressed, the intakes will stay stationary
     else {
-      lgoal.stop(vex::brakeType::brake);
-      rgoal.stop(vex::brakeType::brake);
+      FrontLLift.stop(vex::brakeType::brake);
+      FrontRLift.stop(vex::brakeType::brake);
     }
-    //Wrist Program
+    //BackLift
 
-    //Wrist Up
+    //BackLift Up
     if (Yeetroller.ButtonL1.pressing() ) {
-      lwrist.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
-      rwrist.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
+      BackLLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+      BackRLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
-    //Wrist Down
+    //BackLift Down
     else if (Yeetroller.ButtonL2.pressing()){
-      lwrist.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
-      rwrist.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+      BackLLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
+      BackRLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
-    //If nothing is pressed, the Wrist will stay stationary
+    //If nothing is pressed, the BackLift will stay stationary
     else {
-      lwrist.stop(vex::brakeType::brake);
-      rwrist.stop(vex::brakeType::brake);
-    }
-
-    //Ring Lift & Back intake
-
-    //(Ring Lift & Back intake) intake
-    if (Yeetroller.ButtonUp.pressing()) {
-      rings.spin(vex::directionType::fwd, vcbSpeed, vex::velocityUnits::pct);
-    }
-    //(Ring Lift & Back intake) outake
-    else if (Yeetroller.ButtonDown.pressing()) {
-      rings.spin(vex::directionType::rev, vcbSpeed, vex::velocityUnits::pct);
-    }
-    //If nothing is pressed, the Ring lift & Back Intake will stay stationary
-    else {
-      rings.stop(vex::brakeType::brake);
-    }
-
-    //Clamp Program
-    
-    //Clamp close
-    if (Yeetroller.ButtonB.pressing()) {
-      Clamp.spin(vex::directionType::fwd, 50, vex::velocityUnits::pct);
-    }
-    //Clamp open
-    else if (Yeetroller.ButtonA.pressing()) {
-      Clamp.spin(vex::directionType::rev, 50, vex::velocityUnits::pct);
-    }
-    //If nothing is pressed, the vcb will stay stationary
-    else {
-      Clamp.stop(vex::brakeType::brake);
+      BackLLift.stop(vex::brakeType::brake);
+      BackRLift.stop(vex::brakeType::brake);
     }
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
