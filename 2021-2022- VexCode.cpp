@@ -196,8 +196,8 @@ void usercontrol(void) {
     
     FrontLDrive.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
     BackLDrive.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
-    FrontRDrive.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
-    BackRDrive.spin(vex::directionType::fwd, lefto, vex::velocityUnits::pct);
+    FrontRDrive.spin(vex::directionType::fwd, righto, vex::velocityUnits::pct);
+    BackRDrive.spin(vex::directionType::fwd, righto, vex::velocityUnits::pct);
     //strafe.spin(vex::directionType::fwd, middle, vex::velocityUnits::pct);
     // rightTopDriveMotor.spin(vex::directionType::fwd, RT, vex::velocityUnits::pct);
 
