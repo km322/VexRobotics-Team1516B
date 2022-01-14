@@ -20,8 +20,8 @@ using namespace vex;
 competition Competition;
 
 //Back Lift
-vex::motor  BackRLift = vex::motor( vex:: PORT4,true);
-vex::motor  BackLLift = vex::motor( vex:: PORT3);
+vex::motor  BackRLift = vex::motor( vex:: PORT3,true);
+vex::motor  BackLLift = vex::motor( vex:: PORT4);
 
 //Front Lift
 vex::motor  FrontRLift = vex::motor( vex:: PORT1,true);
