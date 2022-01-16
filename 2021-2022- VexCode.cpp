@@ -2,7 +2,7 @@
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
 /*    Author:       VEX                                                       */
-/*    Created:      Thu Jan 23 2022                                           */
+/*    Created:      Thu Jan 13 2022                                           */
 /*    Description:  Competition Template                                      */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -154,15 +154,21 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-  // intake();
-  // ballIn();
-  // turnRight(4*360);
-  // turnRight((3*360)+1);
-  // moveForward(6.66);
-  // intake();
-  // turnLeft(360);
-  // ballIn();
-  // ballOut();
+  BackLLift.setVelocity(90, percent);
+  BackRLift.setVelocity(90, percent);
+  FrontRDrive.setVelocity(100, percent);
+  FrontLDrive.setVelocity(100, percent);
+  BackRDrive.setVelocity(100, percent);
+  BackLDrive.setVelocity(100, percent);
+  BackRLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
+  BackLLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
+  FrontLDrive.startRotateFor(vex::directionType::rev, 1675, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::rev, 1675, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::rev, 1675, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::rev, 1675, vex::rotationUnits::deg);
+  wait(2.25,seconds);
+  // BackRLift.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
+  // BackLLift.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
 }
 
 /*---------------------------------------------------------------------------*/
