@@ -27,7 +27,7 @@
     <img src="https://calhighprojectgirls.weebly.com/uploads/1/1/5/5/115528279/published/roboticslogo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Vex 1516B Robot Code</h3>
+<h3 align="center">Team 1516B Vex Robot Code</h3>
 
   <p align="center">
     Vex Robotics code for the Tipping Point Vex Game
