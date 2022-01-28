@@ -171,8 +171,23 @@ void autonomous(void) {
   FrontRLift.startRotateFor(vex::directionType::fwd, 1050, vex::rotationUnits::deg);
   FrontLLift.startRotateFor(vex::directionType::fwd, 1050, vex::rotationUnits::deg);
 
-  // BackRLift.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
-  // BackLLift.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
+//   other code for rings
+//   BackLLift.setVelocity(100, percent);
+//   BackRLift.setVelocity(100, percent);
+//   BackLDrive.setVelocity(60, percent);
+//   BackRDrive.setVelocity(60, percent);
+//   FrontLDrive.setVelocity(60, percent);
+//   FrontRDrive.setVelocity(60, percent);
+//   BackRLift.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
+//   BackLLift.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
+//   wait(1.5, seconds);
+//   BackRDrive.startRotateFor(vex::directionType::fwd, 900, vex::rotationUnits::deg);
+//   BackLDrive.startRotateFor(vex::directionType::fwd, 900, vex::rotationUnits::deg);
+//   FrontRDrive.startRotateFor(vex::directionType::fwd, 900, vex::rotationUnits::deg);
+//   FrontLDrive.startRotateFor(vex::directionType::fwd, 900, vex::rotationUnits::deg);
+//   wait(1, seconds);
+//   BackRLift.startRotateFor(vex::directionType::fwd, 600, vex::rotationUnits::deg);
+//   BackLLift.startRotateFor(vex::directionType::fwd, 600, vex::rotationUnits::deg);
 }
 
 /*---------------------------------------------------------------------------*/
