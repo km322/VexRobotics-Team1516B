@@ -30,7 +30,7 @@
 <h3 align="center">Vex 1516B Robot Code</h3>
 
   <p align="center">
-    project_description
+    Vex Robotics code for the Tipping Point Vex Game
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
