@@ -24,8 +24,8 @@ vex::motor  BackRLift = vex::motor( vex:: PORT12,true);
 vex::motor  BackLLift = vex::motor( vex:: PORT11);
 
 //Front Lift
-vex::motor  FrontRLift = vex::motor( vex:: PORT20,true);
-vex::motor  FrontLLift = vex::motor( vex:: PORT8);
+vex::motor  FrontRLift = vex::motor( vex:: PORT20);
+vex::motor  FrontLLift = vex::motor( vex:: PORT8, true);
 
 //Drivetrain
 vex::motor  FrontRDrive = vex::motor( vex:: PORT5);
