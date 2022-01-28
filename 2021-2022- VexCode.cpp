@@ -20,12 +20,12 @@ using namespace vex;
 competition Competition;
 
 //Back Lift
-vex::motor  BackRLift = vex::motor( vex:: PORT3,true);
-vex::motor  BackLLift = vex::motor( vex:: PORT4);
+vex::motor  BackRLift = vex::motor( vex:: PORT12,true);
+vex::motor  BackLLift = vex::motor( vex:: PORT11);
 
 //Front Lift
-vex::motor  FrontRLift = vex::motor( vex:: PORT1,true);
-vex::motor  FrontLLift = vex::motor( vex:: PORT2);
+vex::motor  FrontRLift = vex::motor( vex:: PORT20,true);
+vex::motor  FrontLLift = vex::motor( vex:: PORT8);
 
 //Drivetrain
 vex::motor  FrontRDrive = vex::motor( vex:: PORT5);
@@ -227,12 +227,12 @@ void usercontrol(void) {
     //BackLift
 
     //BackLift Up
-    if (Yeetroller.ButtonL1.pressing() ) {
+    if (Yeetroller.ButtonL2.pressing() ) {
       BackLLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
       BackRLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //BackLift Down
-    else if (Yeetroller.ButtonL2.pressing()){
+    else if (Yeetroller.ButtonL1.pressing()){
       BackLLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
       BackRLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
