@@ -154,19 +154,23 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-  BackLLift.setVelocity(90, percent);
-  BackRLift.setVelocity(90, percent);
+  FrontLLift.setVelocity(90, percent);
+  FrontRLift.setVelocity(90, percent);
   FrontRDrive.setVelocity(100, percent);
   FrontLDrive.setVelocity(100, percent);
   BackRDrive.setVelocity(100, percent);
   BackLDrive.setVelocity(100, percent);
-  BackRLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
-  BackLLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
-  FrontLDrive.startRotateFor(vex::directionType::rev, 1675, vex::rotationUnits::deg);
-  FrontRDrive.startRotateFor(vex::directionType::rev, 1675, vex::rotationUnits::deg);
-  BackRDrive.startRotateFor(vex::directionType::rev, 1675, vex::rotationUnits::deg);
-  BackLDrive.startRotateFor(vex::directionType::rev, 1675, vex::rotationUnits::deg);
-  wait(2.25,seconds);
+  FrontRLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
+  FrontLLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
+  wait(1.5,seconds);
+  FrontLDrive.startRotateFor(vex::directionType::fwd, 720, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::fwd, 720, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::fwd, 720, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::fwd, 720, vex::rotationUnits::deg);
+  wait(1.5,seconds);
+  FrontRLift.startRotateFor(vex::directionType::fwd, 1050, vex::rotationUnits::deg);
+  FrontLLift.startRotateFor(vex::directionType::fwd, 1050, vex::rotationUnits::deg);
+
   // BackRLift.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
   // BackLLift.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
 }
