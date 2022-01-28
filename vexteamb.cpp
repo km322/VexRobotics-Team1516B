@@ -187,6 +187,14 @@ void autonomous(void) {
 
 void usercontrol(void) {
   int vcbSpeed = 100;
+  FrontLLift.setVelocity(100, percent);
+  FrontRLift.setVelocity(100, percent);
+  BackLLift.setVelocity(100, percent);
+  BackRLift.setVelocity(100, percent);
+  FrontRDrive.setVelocity(100, percent);
+  FrontLDrive.setVelocity(100, percent);
+  BackRDrive.setVelocity(100, percent);
+  BackLDrive.setVelocity(100, percent);
 
   int intakeSpeed = 100;
   // User control code here, inside the loop
