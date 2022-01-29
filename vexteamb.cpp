@@ -154,22 +154,60 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-  FrontLLift.setVelocity(90, percent);
-  FrontRLift.setVelocity(90, percent);
+  FrontLLift.setVelocity(80, percent);
+  FrontRLift.setVelocity(80, percent);
+  BackLLift.setVelocity(80, percent);
+  BackRLift.setVelocity(80, percent);
   FrontRDrive.setVelocity(100, percent);
   FrontLDrive.setVelocity(100, percent);
   BackRDrive.setVelocity(100, percent);
   BackLDrive.setVelocity(100, percent);
-  FrontRLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
-  FrontLLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
+
+  // Middle Goal
+  BackRLift.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
+  BackLLift.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
+  FrontLDrive.startRotateFor(vex::directionType::rev, 1700, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::rev, 1700, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::rev, 1700, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::rev, 1700, vex::rotationUnits::deg);
+  wait(2,seconds);
+  BackRLift.startRotateFor(vex::directionType::rev, 400, vex::rotationUnits::deg);
+  BackLLift.startRotateFor(vex::directionType::rev, 400, vex::rotationUnits::deg);
+  FrontLDrive.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
+  wait(.5,seconds);
+  BackRLift.startRotateFor(vex::directionType::rev, 400, vex::rotationUnits::deg);
+  BackLLift.startRotateFor(vex::directionType::rev, 400, vex::rotationUnits::deg);
   wait(1.5,seconds);
-  FrontLDrive.startRotateFor(vex::directionType::fwd, 720, vex::rotationUnits::deg);
-  FrontRDrive.startRotateFor(vex::directionType::fwd, 720, vex::rotationUnits::deg);
-  BackRDrive.startRotateFor(vex::directionType::fwd, 720, vex::rotationUnits::deg);
-  BackLDrive.startRotateFor(vex::directionType::fwd, 720, vex::rotationUnits::deg);
-  wait(1.5,seconds);
-  FrontRLift.startRotateFor(vex::directionType::fwd, 1050, vex::rotationUnits::deg);
-  FrontLLift.startRotateFor(vex::directionType::fwd, 1050, vex::rotationUnits::deg);
+  FrontLDrive.startRotateFor(vex::directionType::fwd, 1850, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::fwd, 1850, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::fwd, 1850, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::fwd, 1850, vex::rotationUnits::deg);
+  wait(2,seconds);
+  // FrontLDrive.startRotateFor(vex::directionType::fwd, 400, vex::rotationUnits::deg);
+  // FrontRDrive.startRotateFor(vex::directionType::rev, 400, vex::rotationUnits::deg);
+  // BackRDrive.startRotateFor(vex::directionType::rev, 400, vex::rotationUnits::deg);
+  // BackLDrive.startRotateFor(vex::directionType::fwd, 400, vex::rotationUnits::deg);
+  // wait(2,seconds);
+  // FrontLDrive.startRotateFor(vex::directionType::rev, 1850, vex::rotationUnits::deg);
+  // FrontRDrive.startRotateFor(vex::directionType::rev, 1850, vex::rotationUnits::deg);
+  // BackRDrive.startRotateFor(vex::directionType::rev, 1850, vex::rotationUnits::deg);
+  // BackLDrive.startRotateFor(vex::directionType::rev, 1850, vex::rotationUnits::deg);
+  // wait(2,seconds);
+
+  // Get Alliance Goal
+  // FrontRLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
+  // FrontLLift.startRotateFor(vex::directionType::rev, 1050, vex::rotationUnits::deg);
+  // wait(1.5,seconds);
+  // FrontLDrive.startRotateFor(vex::directionType::fwd, 360, vex::rotationUnits::deg);
+  // FrontRDrive.startRotateFor(vex::directionType::fwd, 360, vex::rotationUnits::deg);
+  // BackRDrive.startRotateFor(vex::directionType::fwd, 360, vex::rotationUnits::deg);
+  // BackLDrive.startRotateFor(vex::directionType::fwd, 360, vex::rotationUnits::deg);
+  // wait(1.5,seconds);
+  // FrontRLift.startRotateFor(vex::directionType::fwd, 1050, vex::rotationUnits::deg);
+  // FrontLLift.startRotateFor(vex::directionType::fwd, 1050, vex::rotationUnits::deg);
 
 //   other code for rings
 //   BackLLift.setVelocity(100, percent);
@@ -237,12 +275,12 @@ void usercontrol(void) {
     //lift Program
 
     //Lift Up
-    if (Yeetroller.ButtonR1.pressing() ) {
+    if (Yeetroller.ButtonL1.pressing() ) {
       FrontLLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
       FrontRLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //Lift Down
-    else if (Yeetroller.ButtonR2.pressing()){
+    else if (Yeetroller.ButtonL2.pressing()){
       FrontLLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
       FrontRLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
@@ -254,12 +292,12 @@ void usercontrol(void) {
     //BackLift
 
     //BackLift Up
-    if (Yeetroller.ButtonL2.pressing() ) {
+    if (Yeetroller.ButtonR2.pressing() ) {
       BackLLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
       BackRLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //BackLift Down
-    else if (Yeetroller.ButtonL1.pressing()){
+    else if (Yeetroller.ButtonR1.pressing()){
       BackLLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
       BackRLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
