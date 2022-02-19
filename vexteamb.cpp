@@ -10,6 +10,7 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
+// DigitalOutA          digital_out   A               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -32,7 +33,6 @@ vex::motor  FrontRDrive = vex::motor( vex:: PORT5);
 vex::motor  BackRDrive = vex::motor( vex:: PORT10);
 vex::motor  FrontLDrive = vex::motor( vex:: PORT6, true);
 vex::motor  BackLDrive = vex::motor( vex:: PORT9, true);
-
 
 
 //Setting up the controller
@@ -250,6 +250,18 @@ void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
 
+    digital_out dig1 = digital_out( Brain.ThreeWirePort.A);
+
+    if(Yeetroller.ButtonA.pressing() ) {
+      dig1.set( true );
+    }
+    else {
+      if(Yeetroller.ButtonB.pressing()){
+        dig1.set( false );
+      }
+    }
+
+    this_thread::sleep_for(10);
     //Drive Train Program
     int leftForward = Yeetroller.Axis3.position();
     int rightSideways = Yeetroller.Axis1.position();  
