@@ -236,7 +236,6 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) {
-  int vcbSpeed = 100;
   FrontLLift.setVelocity(100, percent);
   FrontRLift.setVelocity(100, percent);
   BackLLift.setVelocity(100, percent);
@@ -247,21 +246,46 @@ void usercontrol(void) {
   BackLDrive.setVelocity(100, percent);
 
   int intakeSpeed = 100;
+  int count = 0;
+  int count1 = 0;
   // User control code here, inside the loop
   while (1) {
+ 
+    digital_out pneum = digital_out( Brain.ThreeWirePort.A);
 
-    digital_out dig1 = digital_out( Brain.ThreeWirePort.A);
-
-    if(Yeetroller.ButtonA.pressing() ) {
-      dig1.set( true );
+    if(Yeetroller.ButtonLeft.pressing()&&count%2==0) {
+      pneum.set( true );
+      count +=1;
+      wait(400, msec);
     }
     else {
-      if(Yeetroller.ButtonB.pressing()){
-        dig1.set( false );
+      if(Yeetroller.ButtonLeft.pressing()&&count%2==1){
+        pneum.set( false );
+        count+=1;
+        wait(400, msec);
       }
     }
 
     this_thread::sleep_for(10);
+
+
+    digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
+
+    if(Yeetroller.ButtonA.pressing()&&count1%2==0) {
+      pneum1.set( true );
+      count1 +=1;
+      wait(400, msec);
+    }
+    else {
+      if(Yeetroller.ButtonA.pressing()&&count1%2==1){
+        pneum1.set( false );
+        count1 +=1;
+        wait(400, msec);
+      }
+    }
+
+    this_thread::sleep_for(10);
+    
     //Drive Train Program
     int leftForward = Yeetroller.Axis3.position();
     int rightSideways = Yeetroller.Axis1.position();  
