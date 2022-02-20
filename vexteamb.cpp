@@ -20,13 +20,13 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
-//Back Lift
-vex::motor  BackRLift = vex::motor( vex:: PORT12,true);
-vex::motor  BackLLift = vex::motor( vex:: PORT11);
+//4 bar
+vex::motor  FrontRLift = vex::motor( vex:: PORT12);
+vex::motor  FrontLLift = vex::motor( vex:: PORT11, true);
 
-//Front Lift
-vex::motor  FrontRLift = vex::motor( vex:: PORT20);
-vex::motor  FrontLLift = vex::motor( vex:: PORT8, true);
+//Back Lift
+vex::motor  BackRLift = vex::motor( vex:: PORT20);
+vex::motor  BackLLift = vex::motor( vex:: PORT8, true);
 
 //Drivetrain
 vex::motor  FrontRDrive = vex::motor( vex:: PORT5);
@@ -253,13 +253,13 @@ void usercontrol(void) {
  
     digital_out pneum = digital_out( Brain.ThreeWirePort.A);
 
-    if(Yeetroller.ButtonDown.pressing()&&count%2==0) {
+    if(Yeetroller.ButtonLeft.pressing()&&count%2==0) {
       pneum.set( true );
       count +=1;
       wait(400, msec);
     }
     else {
-      if(Yeetroller.ButtonDown.pressing()&&count%2==1){
+      if(Yeetroller.ButtonLeft.pressing()&&count%2==1){
         pneum.set( false );
         count+=1;
         wait(400, msec);
@@ -269,15 +269,15 @@ void usercontrol(void) {
     this_thread::sleep_for(10);
 
 
-    digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
+    digital_out pneum1 = digital_out( Brain.ThreeWirePort.D);
 
-    if(Yeetroller.ButtonB.pressing()&&count1%2==0) {
+    if(Yeetroller.ButtonA.pressing()&&count1%2==0) {
       pneum1.set( true );
       count1 +=1;
       wait(400, msec);
     }
     else {
-      if(Yeetroller.ButtonB.pressing()&&count1%2==1){
+      if(Yeetroller.ButtonA.pressing()&&count1%2==1){
         pneum1.set( false );
         count1 +=1;
         wait(400, msec);
