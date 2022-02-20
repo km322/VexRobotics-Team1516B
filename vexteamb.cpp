@@ -21,8 +21,8 @@ using namespace vex;
 competition Competition;
 
 //4 bar
-vex::motor  FrontRLift = vex::motor( vex:: PORT12);
-vex::motor  FrontLLift = vex::motor( vex:: PORT11, true);
+vex::motor  FrontRLift = vex::motor( vex:: PORT12, true);
+vex::motor  FrontLLift = vex::motor( vex:: PORT11);
 
 //Back Lift
 vex::motor  BackRLift = vex::motor( vex:: PORT20);
@@ -154,30 +154,33 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
-  FrontLLift.setVelocity(80, percent);
-  FrontRLift.setVelocity(80, percent);
-  BackLLift.setVelocity(80, percent);
-  BackRLift.setVelocity(80, percent);
+  FrontLLift.setVelocity(100, percent);
+  FrontRLift.setVelocity(100, percent);
+  BackLLift.setVelocity(100, percent);
+  BackRLift.setVelocity(100, percent);
   FrontRDrive.setVelocity(100, percent);
   FrontLDrive.setVelocity(100, percent);
   BackRDrive.setVelocity(100, percent);
   BackLDrive.setVelocity(100, percent);
 
+  digital_out pneum = digital_out( Brain.ThreeWirePort.A);
+  digital_out pneum1 = digital_out( Brain.ThreeWirePort.D);
+
   // Middle Goal
-  FrontRLift.startRotateFor(vex::directionType::rev, 950, vex::rotationUnits::deg);
-  FrontLLift.startRotateFor(vex::directionType::rev, 950, vex::rotationUnits::deg);
-  FrontLDrive.startRotateFor(vex::directionType::fwd, 1700, vex::rotationUnits::deg);
-  FrontRDrive.startRotateFor(vex::directionType::fwd, 1700, vex::rotationUnits::deg);
-  BackRDrive.startRotateFor(vex::directionType::fwd, 1700, vex::rotationUnits::deg);
-  BackLDrive.startRotateFor(vex::directionType::fwd, 1700, vex::rotationUnits::deg);
+  pneum1.set(false);
+  BackLLift.startRotateFor(vex::directionType::fwd, 1375, vex::rotationUnits::deg);
+  BackRLift.startRotateFor(vex::directionType::fwd, 1375, vex::rotationUnits::deg);
+  FrontLDrive.startRotateFor(vex::directionType::fwd, 1800, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::fwd, 1800, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::fwd, 1800, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::fwd, 1800, vex::rotationUnits::deg);
   wait(1.6,seconds);
-  FrontRLift.startRotateFor(vex::directionType::fwd, 700, vex::rotationUnits::deg);
-  FrontLLift.startRotateFor(vex::directionType::fwd, 700, vex::rotationUnits::deg);
+  pneum1.set(true);
   FrontLDrive.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
   FrontRDrive.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
   BackRDrive.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
   BackLDrive.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
-  wait(.75,seconds);
+  wait(.6,seconds);
   FrontLDrive.startRotateFor(vex::directionType::rev, 1850, vex::rotationUnits::deg);
   FrontRDrive.startRotateFor(vex::directionType::rev, 1850, vex::rotationUnits::deg);
   BackRDrive.startRotateFor(vex::directionType::rev, 1850, vex::rotationUnits::deg);
@@ -253,16 +256,16 @@ void usercontrol(void) {
  
     digital_out pneum = digital_out( Brain.ThreeWirePort.A);
 
-    if(Yeetroller.ButtonLeft.pressing()&&count%2==0) {
+    if(Yeetroller.ButtonA.pressing()&&count%2==0) {
       pneum.set( true );
       count +=1;
-      wait(400, msec);
+      this_thread::sleep_for(200);
     }
     else {
-      if(Yeetroller.ButtonLeft.pressing()&&count%2==1){
+      if(Yeetroller.ButtonA.pressing()&&count%2==1){
         pneum.set( false );
         count+=1;
-        wait(400, msec);
+        this_thread::sleep_for(200);
       }
     }
 
@@ -271,16 +274,16 @@ void usercontrol(void) {
 
     digital_out pneum1 = digital_out( Brain.ThreeWirePort.D);
 
-    if(Yeetroller.ButtonA.pressing()&&count1%2==0) {
+    if(Yeetroller.ButtonLeft.pressing()&&count1%2==0) {
       pneum1.set( true );
       count1 +=1;
-      wait(400, msec);
+      wait(200, msec);
     }
     else {
-      if(Yeetroller.ButtonA.pressing()&&count1%2==1){
+      if(Yeetroller.ButtonLeft.pressing()&&count1%2==1){
         pneum1.set( false );
         count1 +=1;
-        wait(400, msec);
+        wait(200, msec);
       }
     }
 
@@ -308,12 +311,12 @@ void usercontrol(void) {
     //lift Program
 
     //Lift Up
-    if (Yeetroller.ButtonL1.pressing() ) {
+    if (Yeetroller.ButtonL2.pressing() ) {
       FrontLLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
       FrontRLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //Lift Down
-    else if (Yeetroller.ButtonL2.pressing()){
+    else if (Yeetroller.ButtonL1.pressing()){
       FrontLLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
       FrontRLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
@@ -325,12 +328,12 @@ void usercontrol(void) {
     //BackLift
 
     //BackLift Up
-    if (Yeetroller.ButtonR2.pressing() ) {
+    if (Yeetroller.ButtonR1.pressing() ) {
       BackLLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
       BackRLift.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //BackLift Down
-    else if (Yeetroller.ButtonR1.pressing()){
+    else if (Yeetroller.ButtonR2.pressing()){
       BackLLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
       BackRLift.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
