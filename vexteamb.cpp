@@ -253,13 +253,13 @@ void usercontrol(void) {
  
     digital_out pneum = digital_out( Brain.ThreeWirePort.A);
 
-    if(Yeetroller.ButtonLeft.pressing()&&count%2==0) {
+    if(Yeetroller.ButtonDown.pressing()&&count%2==0) {
       pneum.set( true );
       count +=1;
       wait(400, msec);
     }
     else {
-      if(Yeetroller.ButtonLeft.pressing()&&count%2==1){
+      if(Yeetroller.ButtonDown.pressing()&&count%2==1){
         pneum.set( false );
         count+=1;
         wait(400, msec);
@@ -271,13 +271,13 @@ void usercontrol(void) {
 
     digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
 
-    if(Yeetroller.ButtonA.pressing()&&count1%2==0) {
+    if(Yeetroller.ButtonB.pressing()&&count1%2==0) {
       pneum1.set( true );
       count1 +=1;
       wait(400, msec);
     }
     else {
-      if(Yeetroller.ButtonA.pressing()&&count1%2==1){
+      if(Yeetroller.ButtonB.pressing()&&count1%2==1){
         pneum1.set( false );
         count1 +=1;
         wait(400, msec);
