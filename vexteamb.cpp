@@ -104,6 +104,26 @@ void autonomous(void) {
 
   digital_out pneum = digital_out( Brain.ThreeWirePort.A);
   digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
+
+  pneum1.set(false);
+  pneum.set(false);
+  FrontLDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
+  MiddleRDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
+  MiddleLDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
+  wait(1.5,seconds);
+  pneum1.set(true);
+  wait(.25,seconds);
+  FourBar.startRotateFor(vex::directionType::fwd, 1375, vex::rotationUnits::deg);
+  FrontLDrive.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
+  MiddleRDrive.startRotateFor(vex::directionType::fwd, 900, vex::rotationUnits::deg);
+  MiddleLDrive.startRotateFor(vex::directionType::fwd, 900, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
+  wait(2,seconds);
 }
 
 /*---------------------------------------------------------------------------*/
