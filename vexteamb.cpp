@@ -24,12 +24,12 @@ competition Competition;
 vex::motor  FourBar = vex::motor( vex:: PORT1, true);
 
 //Drivetrain
-vex::motor  FrontRDrive = vex::motor( vex:: PORT2);
+vex::motor  FrontRDrive = vex::motor( vex:: PORT13);
 vex::motor  BackRDrive = vex::motor( vex:: PORT3);
-vex::motor  MiddleRDrive = vex::motor( vex:: PORT4);
-vex::motor  FrontLDrive = vex::motor( vex:: PORT5, true);
-vex::motor  BackLDrive = vex::motor( vex:: PORT6, true);
-vex::motor  MiddleLDrive = vex::motor( vex:: PORT7, true);
+vex::motor  MiddleRDrive = vex::motor( vex:: PORT11);
+vex::motor  FrontLDrive = vex::motor( vex:: PORT14, true);
+vex::motor  BackLDrive = vex::motor( vex:: PORT2, true);
+vex::motor  MiddleLDrive = vex::motor( vex:: PORT12, true);
 
 //Ring Lift
 vex::motor  Rings = vex::motor( vex:: PORT8, true);
@@ -190,11 +190,11 @@ void usercontrol(void) {
 
     //Lift Up
     if (Controller.ButtonR1.pressing() ) {
-      FourBar.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+      FourBar.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
     //Lift Down
     else if (Controller.ButtonR2.pressing()){
-      FourBar.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
+      FourBar.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
   
     }
     //If nothing is pressed, the intakes will stay stationary
