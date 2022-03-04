@@ -209,11 +209,11 @@ void usercontrol(void) {
     //lift Program
 
     //Lift Up
-    if (Controller.ButtonR1.pressing() ) {
+    if (Controller.ButtonL1.pressing() ) {
       FourBar.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
     //Lift Down
-    else if (Controller.ButtonR2.pressing()){
+    else if (Controller.ButtonL2.pressing()){
       FourBar.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
   
     }
@@ -224,11 +224,11 @@ void usercontrol(void) {
     //BackLift
 
     //BackLift Up
-    if (Controller.ButtonL1.pressing() ) {
+    if (Controller.ButtonR1.pressing() ) {
       Rings.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //BackLift Down
-    else if (Controller.ButtonL2.pressing()){
+    else if (Controller.ButtonR2.pressing()){
       Rings.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //If nothing is pressed, the BackLift will stay stationary
