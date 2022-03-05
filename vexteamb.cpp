@@ -24,15 +24,15 @@ competition Competition;
 vex::motor  FourBar = vex::motor( vex:: PORT1, true);
 
 //Drivetrain
-vex::motor  FrontRDrive = vex::motor( vex:: PORT13);
-vex::motor  BackRDrive = vex::motor( vex:: PORT3);
-vex::motor  MiddleRDrive = vex::motor( vex:: PORT11);
-vex::motor  FrontLDrive = vex::motor( vex:: PORT14, true);
-vex::motor  BackLDrive = vex::motor( vex:: PORT2, true);
-vex::motor  MiddleLDrive = vex::motor( vex:: PORT12, true);
+vex::motor  FrontRDrive = vex::motor( vex:: PORT19);
+vex::motor  BackRDrive = vex::motor( vex:: PORT2);
+vex::motor  MiddleRDrive = vex::motor( vex:: PORT9);
+vex::motor  FrontLDrive = vex::motor( vex:: PORT3, true);
+vex::motor  BackLDrive = vex::motor( vex:: PORT8, true);
+vex::motor  MiddleLDrive = vex::motor( vex:: PORT7, true);
 
 //Ring Lift
-vex::motor  Rings = vex::motor( vex:: PORT8, true);
+vex::motor  Rings = vex::motor( vex:: PORT4, true);
 
 //Setting up the controller
 
@@ -107,22 +107,22 @@ void autonomous(void) {
 
   pneum1.set(false);
   pneum.set(false);
-  FrontLDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
-  FrontRDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
-  MiddleRDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
-  MiddleLDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
-  BackRDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
-  BackLDrive.startRotateFor(vex::directionType::fwd, 1000, vex::rotationUnits::deg);
-  wait(1.5,seconds);
+  FrontLDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
+  MiddleRDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
+  MiddleLDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
+  wait(1,seconds);
   pneum1.set(true);
   wait(.25,seconds);
-  FourBar.startRotateFor(vex::directionType::fwd, 1375, vex::rotationUnits::deg);
-  FrontLDrive.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
-  FrontRDrive.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
-  MiddleRDrive.startRotateFor(vex::directionType::fwd, 900, vex::rotationUnits::deg);
-  MiddleLDrive.startRotateFor(vex::directionType::fwd, 900, vex::rotationUnits::deg);
-  BackRDrive.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
-  BackLDrive.startRotateFor(vex::directionType::rev, 900, vex::rotationUnits::deg);
+  FourBar.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  FrontLDrive.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
+  FrontRDrive.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
+  MiddleRDrive.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
+  MiddleLDrive.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
+  BackRDrive.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
+  BackLDrive.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
   wait(2,seconds);
 }
 
@@ -209,12 +209,12 @@ void usercontrol(void) {
     //lift Program
 
     //Lift Up
-    if (Controller.ButtonL1.pressing() ) {
-      FourBar.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
+    if (Controller.ButtonR1.pressing() ) {
+      FourBar.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
     }
     //Lift Down
-    else if (Controller.ButtonL2.pressing()){
-      FourBar.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+    else if (Controller.ButtonR2.pressing()){
+      FourBar.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
   
     }
     //If nothing is pressed, the intakes will stay stationary
@@ -224,11 +224,11 @@ void usercontrol(void) {
     //BackLift
 
     //BackLift Up
-    if (Controller.ButtonR1.pressing() ) {
-      Rings.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
+    if (Controller.ButtonL1.pressing() ) {
+      Rings.spin(vex::directionType::rev, intakeSpeed, vex::velocityUnits::pct);
     }
     //BackLift Down
-    else if (Controller.ButtonR2.pressing()){
+    else if (Controller.ButtonL2.pressing()){
       Rings.spin(vex::directionType::fwd, intakeSpeed, vex::velocityUnits::pct);
     }
     //If nothing is pressed, the BackLift will stay stationary
