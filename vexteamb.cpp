@@ -113,9 +113,9 @@ void autonomous(void) {
   MiddleLDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
   BackRDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
   BackLDrive.startRotateFor(vex::directionType::fwd, 800, vex::rotationUnits::deg);
-  wait(1,seconds);
+  wait(0.95,seconds);
   pneum1.set(true);
-  wait(.25,seconds);
+  wait(.27,seconds);
   FourBar.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
   FrontLDrive.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
   FrontRDrive.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
