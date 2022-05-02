@@ -20,10 +20,10 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
-//4 bar
+//4 bar motor
 vex::motor  FourBar = vex::motor( vex:: PORT1, true);
 
-//Drivetrain
+//Drivetrain motors
 vex::motor  FrontRDrive = vex::motor( vex:: PORT19);
 vex::motor  BackRDrive = vex::motor( vex:: PORT2);
 vex::motor  MiddleRDrive = vex::motor( vex:: PORT9);
@@ -31,7 +31,7 @@ vex::motor  FrontLDrive = vex::motor( vex:: PORT3, true);
 vex::motor  BackLDrive = vex::motor( vex:: PORT8, true);
 vex::motor  MiddleLDrive = vex::motor( vex:: PORT7, true);
 
-//Ring Lift
+//Ring Lift motor
 vex::motor  Rings = vex::motor( vex:: PORT4, true);
 
 //Setting up the controller
