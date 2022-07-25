@@ -32,14 +32,14 @@
   <p align="center">
     Vex Robotics code for the Tipping Point Vex Game
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/km322/VexRobotics-Team1516B"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/km322/VexRobotics-Team1516B">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/km322/VexRobotics-Team1516B/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/km322/VexRobotics-Team1516B/issues">Request Feature</a>
   </p>
 </div>
 
