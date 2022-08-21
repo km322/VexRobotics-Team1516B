@@ -18,7 +18,8 @@ using namespace vex;
 competition Competition;
 
 //Intake Motor
-vex::motor  Intake = vex::motor( vex:: PORT1);
+vex::motor  Intake1 = vex::motor( vex:: PORT1);
+vex::motor  Intake2 = vex::motor( vex::PORT1, true);
 
 //Setting up the controller
 vex::controller Controller = vex::controller();
@@ -80,19 +81,22 @@ void autonomous(void) {
 }
 
 void usercontrol(void){
-  Intake.setVelocity(100, percent);
+  Intake1.setVelocity(100, percent);
+  Intake2.setVelocity(100, percent);
   while (1){
     if (Controller.ButtonR1.pressing() ) {
-      Intake.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+      Intake1.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+      Intake2.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
     }
     //Lift Down
     else if (Controller.ButtonR2.pressing()){
-      Intake.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
-  
+      Intake1.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+      Intake1.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
     }
     //If nothing is pressed, the intakes will stay stationary
     else {
-      Intake.stop(vex::brakeType::brake);
+      Intake1.stop(vex::brakeType::brake);
+      Intake2.stop(vex::brakeType::brake);
     }
     wait(20, msec);
   }
