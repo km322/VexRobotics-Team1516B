@@ -19,7 +19,7 @@ competition Competition;
 
 //Intake Motor
 vex::motor  Intake1 = vex::motor( vex:: PORT1);
-vex::motor  Intake2 = vex::motor( vex::PORT1, true);
+vex::motor  Intake2 = vex::motor( vex::PORT2, true);
 
 //Setting up the controller
 vex::controller Controller = vex::controller();
