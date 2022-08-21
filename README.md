@@ -30,7 +30,7 @@
 <h3 align="center">Team 1516B Vex Robot Code</h3>
 
   <p align="center">
-    Vex Robotics code for the Tipping Point Vex Game
+    Vex Robotics code for the Tipping Point Vex Game(2021-2022 folder), and the code for the 2022-2023 game.
     <br />
     <a href="https://github.com/km322/VexRobotics-Team1516B"><strong>Explore the docs »</strong></a>
     <br />
