@@ -99,8 +99,8 @@ void usercontrol(void){
 
     // Flywheel on and off buttom using A
     if(Controller.ButtonA.pressing()&&count%2==0) {
-      Flywheel1.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
-      Flywheel2.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+      Flywheel1.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+      Flywheel2.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
       count +=1;
       this_thread::sleep_for(200);
     }
