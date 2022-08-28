@@ -145,10 +145,10 @@ void usercontrol(void){
     X1=axis4;
     X2=axis1;
 
-    RightFront.spin(vex::directionType::fwd,overFlow(Y1-X2-X1),vex::velocityUnits::pct);
-    RightBack.spin(vex::directionType::fwd,overFlow(Y1-X2+X1),vex::velocityUnits::pct);
-    LeftFront.spin(vex::directionType::fwd,overFlow(Y1+X2+X1),vex::velocityUnits::pct);
-    LeftBack.spin(vex::directionType::fwd,overFlow(Y1+X2-X1),vex::velocityUnits::pct);
+    RightFront.spin(vex::directionType::fwd, runoff(overFlow(Y1-X2-X1)),vex::velocityUnits::pct);
+    RightBack.spin(vex::directionType::fwd,runoff(overFlow(Y1-X2+X1)),vex::velocityUnits::pct);
+    LeftFront.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2+X1)),vex::velocityUnits::pct);
+    LeftBack.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2-X1)),vex::velocityUnits::pct);
     wait(20, msec);
   }
 }
