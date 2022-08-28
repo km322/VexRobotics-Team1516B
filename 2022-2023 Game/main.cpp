@@ -18,8 +18,15 @@ using namespace vex;
 competition Competition;
 
 //Intake Motor
-vex::motor  Intake1 = vex::motor( vex:: PORT1);
-vex::motor  Intake2 = vex::motor( vex::PORT2, true);
+vex::motor  Intake = vex::motor( vex:: PORT1);
+vex::motor  Roller = vex::motor( vex:: PORT2, true);
+vex::motor  Flywheel1 = vex::motor( vex:: PORT3);
+vex::motor  Flywheel2 = vex::motor( vex:: PORT4, true);
+vex::motor  RightFront = vex::motor(vex::PORT5);
+vex::motor  RightBack = vex::motor(vex::PORT6);
+vex::motor  LeftFront = vex::motor(vex::PORT7, true);
+vex::motor  LeftBack = vex::motor(vex::PORT8, true);
+
 
 //Setting up the controller
 vex::controller Controller = vex::controller();
@@ -81,23 +88,67 @@ void autonomous(void) {
 }
 
 void usercontrol(void){
-  Intake1.setVelocity(100, percent);
-  Intake2.setVelocity(100, percent);
+  // Setting the speeds and defining the variables
+  int count = 0, axis3 = 0, axis4 = 0, axis1 = 0, X1 = 0, X2 = 0, Y1 = 0;
+
+  Intake.setVelocity(100, percent);
+  Roller.setVelocity(100, percent);
+  Flywheel1.setVelocity(100, percent);
+  Flywheel2.setVelocity(100, percent);
   while (1){
-    if (Controller.ButtonR1.pressing() ) {
-      Intake1.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
-      Intake2.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+
+    // Flywheel on and off buttom using A
+    if(Controller.ButtonA.pressing()&&count%2==0) {
+      Flywheel1.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+      Flywheel2.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+      count +=1;
+      this_thread::sleep_for(200);
     }
-    //Lift Down
+    else {
+      if(Controller.ButtonA.pressing()&&count%2==1){
+        Flywheel1.stop(vex::brakeType::brake);
+        Flywheel2.stop(vex::brakeType::brake);
+        count+=1;
+        this_thread::sleep_for(200);
+      }
+    }
+
+    //Intake Controls
+    if (Controller.ButtonR1.pressing() ) {
+      Intake.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+    }
     else if (Controller.ButtonR2.pressing()){
-      Intake1.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
-      Intake1.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+      Intake.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
     }
     //If nothing is pressed, the intakes will stay stationary
     else {
-      Intake1.stop(vex::brakeType::brake);
-      Intake2.stop(vex::brakeType::brake);
+      Intake.stop(vex::brakeType::brake);
     }
+
+    //Roller Controls
+    if (Controller.ButtonL1.pressing() ) {
+      Roller.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+    }
+    else if (Controller.ButtonL2.pressing()){
+      Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+    }
+    //If nothing is pressed, the rollers will stay stationary
+    else {
+      Roller.stop(vex::brakeType::brake);
+    }
+
+    //Drivertrain Control (This is very scuffed for now, once we test it will be better)
+    axis3 = Controller.Axis3.position();
+    axis1 = Controller.Axis1.position();
+    axis4 = Controller.Axis4.position();
+    Y1=axis3;
+    X1=axis4;
+    X2=axis1;
+
+    RightFront.spin(vex::directionType::fwd,overFlow(Y1-X2-X1),vex::velocityUnits::pct);
+    RightBack.spin(vex::directionType::fwd,overFlow(Y1-X2+X1),vex::velocityUnits::pct);
+    LeftFront.spin(vex::directionType::fwd,overFlow(Y1+X2+X1),vex::velocityUnits::pct);
+    LeftBack.spin(vex::directionType::fwd,overFlow(Y1+X2-X1),vex::velocityUnits::pct);
     wait(20, msec);
   }
 }
