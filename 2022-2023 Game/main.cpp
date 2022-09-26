@@ -22,10 +22,10 @@ vex::motor  Intake = vex::motor( vex:: PORT19);
 vex::motor  Roller = vex::motor( vex:: PORT2, true);
 vex::motor  Flywheel1 = vex::motor( vex:: PORT3);
 vex::motor  Flywheel2 = vex::motor( vex:: PORT4, true);
-vex::motor  RightBack = vex::motor(vex::PORT18);
-vex::motor  RightFront = vex::motor(vex::PORT20);
-vex::motor  LeftBack = vex::motor(vex::PORT1, true);
-vex::motor  LeftFront = vex::motor(vex::PORT8, true);
+vex::motor  RightBack = vex::motor(vex::PORT1);
+vex::motor  RightFront = vex::motor(vex::PORT8);
+vex::motor  LeftBack = vex::motor(vex::PORT20, true);
+vex::motor  LeftFront = vex::motor(vex::PORT18, true);
 
 //Setting up the controller
 vex::controller Controller = vex::controller();
@@ -158,10 +158,10 @@ void usercontrol(void){
     X1=axis4;
     X2=axis1;
 
-    RightFront.spin(vex::directionType::rev, runoff(overFlow(Y1+X2-X1)),vex::velocityUnits::pct);
-    RightBack.spin(vex::directionType::rev,runoff(overFlow(Y1+X2+X1)),vex::velocityUnits::pct);
-    LeftFront.spin(vex::directionType::rev,runoff(overFlow(Y1-X2+X1)),vex::velocityUnits::pct);
-    LeftBack.spin(vex::directionType::rev,runoff(overFlow(Y1-X2-X1)),vex::velocityUnits::pct);
+    RightFront.spin(vex::directionType::fwd, runoff(overFlow(Y1-X2-X1)),vex::velocityUnits::pct);
+    RightBack.spin(vex::directionType::fwd,runoff(overFlow(Y1-X2+X1)),vex::velocityUnits::pct);
+    LeftFront.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2+X1)),vex::velocityUnits::pct);
+    LeftBack.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2-X1)),vex::velocityUnits::pct);
     wait(20, msec);
   }
 }
