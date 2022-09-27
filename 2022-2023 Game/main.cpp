@@ -119,8 +119,8 @@ void usercontrol(void){
     }
     else {
       if(Controller.ButtonA.pressing()&&count%2==1){
-        Flywheel1.stop(vex::brakeType::brake);
-        Flywheel2.stop(vex::brakeType::brake);
+        Flywheel1.stop(vex::brakeType::coast);
+        Flywheel2.stop(vex::brakeType::coast);
         count+=1;
         this_thread::sleep_for(200);
       }
