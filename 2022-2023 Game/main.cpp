@@ -21,7 +21,7 @@ competition Competition;
 vex::motor  Intake = vex::motor( vex:: PORT19);
 vex::motor  Roller = vex::motor( vex:: PORT2, true);
 vex::motor  Flywheel1 = vex::motor( vex:: PORT3);
-vex::motor  Flywheel2 = vex::motor( vex:: PORT4, true);
+vex::motor  Flywheel2 = vex::motor( vex:: PORT4);
 vex::motor  RightBack = vex::motor(vex::PORT1);
 vex::motor  RightFront = vex::motor(vex::PORT8);
 vex::motor  LeftBack = vex::motor(vex::PORT20, true);
@@ -68,6 +68,8 @@ void pre_auton(void) {
 
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
+  digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
+  pneum1.set( true );
 }
 
 
@@ -104,8 +106,6 @@ void usercontrol(void){
     }
     digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
     if(Controller.ButtonLeft.pressing()) {
-      pneum1.set( true );
-      this_thread::sleep_for(200);
       pneum1.set( false );
     }
 
