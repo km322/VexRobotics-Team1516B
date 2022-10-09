@@ -86,6 +86,27 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
+  Intake.setVelocity(100, percent);
+  Roller.setVelocity(100, percent);
+  Flywheel1.setVelocity(100, percent);
+  Flywheel2.setVelocity(100, percent);
+  LeftBack.setVelocity(100, percent);
+  LeftFront.setVelocity(100, percent);
+  RightFront.setVelocity(100, percent);
+  RightBack.setVelocity(100, percent);
+
+  digital_out pneum = digital_out( Brain.ThreeWirePort.A);
+  digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
+
+  pneum1.set(true);
+  pneum.set(false);
+
+  Roller.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+
 }
 
 void usercontrol(void){
@@ -105,7 +126,7 @@ void usercontrol(void){
       pneum.set( false );
     }
     digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
-    if(Controller.ButtonLeft.pressing()) {
+    if(Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       pneum1.set( false );
     }
 
