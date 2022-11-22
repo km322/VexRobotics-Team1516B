@@ -8,24 +8,29 @@
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Vision11             vision        11              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+
 
 using namespace vex;
 
 // A global instance of competition
 competition Competition;
 
-//Intake Motor
-vex::motor  Intake = vex::motor( vex:: PORT19);
+
+vex::motor  Intake = vex::motor( vex:: PORT10);
 vex::motor  Roller = vex::motor( vex:: PORT2, true);
-vex::motor  Flywheel1 = vex::motor( vex:: PORT3);
-vex::motor  Flywheel2 = vex::motor( vex:: PORT4);
+vex::motor  Flywheel1 = vex::motor( vex:: PORT15);
+vex::motor  Flywheel2 = vex::motor( vex:: PORT16, true);
 vex::motor  RightBack = vex::motor(vex::PORT1);
 vex::motor  RightFront = vex::motor(vex::PORT8);
-vex::motor  LeftBack = vex::motor(vex::PORT20, true);
+vex::motor  LeftBack = vex::motor(vex::PORT3, true);
 vex::motor  LeftFront = vex::motor(vex::PORT18, true);
+vex::vision VisionSensor (vex::PORT11);
 
 //Setting up the controller
 vex::controller Controller = vex::controller();
@@ -68,8 +73,6 @@ void pre_auton(void) {
 
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
-  digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
-  pneum1.set( true );
 }
 
 
@@ -86,6 +89,11 @@ void autonomous(void) {
   // ..........................................................................
   // Insert autonomous user code here.
   // ..........................................................................
+  
+  // ..........................................................................
+  // autonomous for closer to human field
+  // ..........................................................................
+  //set velocity percentage of motors
   Intake.setVelocity(100, percent);
   Roller.setVelocity(100, percent);
   Flywheel1.setVelocity(100, percent);
@@ -95,18 +103,61 @@ void autonomous(void) {
   RightFront.setVelocity(100, percent);
   RightBack.setVelocity(100, percent);
 
+  //something that fixes the error
   digital_out pneum = digital_out( Brain.ThreeWirePort.A);
   digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
 
-  pneum1.set(true);
+  //settting state of pneumatics
+  pneum1.set(false);
   pneum.set(false);
 
-  Roller.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
-  LeftBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  LeftFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  //[motor name].startRotateFor(vex::directionType::[fwd/rev],[degree of rotation (one full roatation = 360)] vex::rotationUnits::deg)
+  //going backwards and rolling roller
+  LeftBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
+  wait(2,seconds);
+  Roller.startRotateFor(vex::directionType::rev, 400, vex::rotationUnits::deg);
+  wait(2,seconds);
 
+  // ..........................................................................
+  // autonomous for further side rollers
+  // ..........................................................................
+  // sliding
+  // LeftBack.startRotateFor(vex::directionType::fwd, 50, vex::rotationUnits::deg);
+  // LeftFront.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
+  // RightFront.startRotateFor(vex::directionType::fwd, 50, vex::rotationUnits::deg);
+  // RightBack.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
+  // wait(0.5,seconds);
+  // //going backwards
+  // LeftBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  // LeftFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  // RightFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  // RightBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  // wait(0.75,seconds);
+  // //fly wheel and roller
+  // Roller.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
+  // wait(2,seconds);
+  // Flywheel1.startRotateFor(vex::directionType::fwd, 10000, vex::rotationUnits::deg);
+  // Flywheel2.startRotateFor(vex::directionType::fwd, 10000, vex::rotationUnits::deg);
+  // //going back forward to the line 
+  // LeftBack.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
+  // LeftFront.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
+  // RightFront.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
+  // RightBack.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
+  // wait(1,seconds);
+  // //turning a bit getting into position for shooting
+  // LeftFront.startRotateFor(vex::directionType::fwd, 12, vex::rotationUnits::deg);
+  // LeftBack.startRotateFor(vex::directionType::fwd, 12, vex::rotationUnits::deg);
+  // wait(0.12,seconds);
+  // ///shooting
+  // for (int i = 0; i < 2; i++){
+  //   pneum.set( true );
+  //   wait(0.2,seconds);
+  //   pneum.set( false );
+  //   wait(0.1,seconds);
+  // }
 }
 
 void usercontrol(void){
@@ -127,7 +178,7 @@ void usercontrol(void){
     }
     digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
     if(Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
-      pneum1.set( false );
+      pneum1.set( true );
     }
 
     this_thread::sleep_for(10);
