@@ -211,15 +211,19 @@ void usercontrol(void){
 
     //Roller Controls
     if (Controller.ButtonY.pressing()&&c%2==0){
+      Controller.Screen.clearLine(3);
+      Controller.Screen.setCursor(3,1);
       c += 1;
       Controller.Screen.print("Color: Red");
-      this_thread::sleep_for(1000);
+      this_thread::sleep_for(200);
     }
     else{
      if (Controller.ButtonY.pressing()&&c%2==1){
+      Controller.Screen.clearLine(3);
+      Controller.Screen.setCursor(3,1);
       c += 1;
       Controller.Screen.print("Color: Blue");
-      this_thread::sleep_for(1000);
+      this_thread::sleep_for(200);
       }
     }
 
