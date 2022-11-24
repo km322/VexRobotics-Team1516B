@@ -9,7 +9,7 @@ brain  Brain;
 
 // VEXcode device constructors
 /*vex-vision-config:begin*/
-signature Vision11__DISK = signature (1, -1233, -613, -923, -4719, -4061, -4390, 11, 0);
+signature Vision11__DISK = signature (1, 3421, 4127, 3774, -6007, -5461, -5734, 3, 0);
 vision Vision11 = vision (PORT11, 50, Vision11__DISK);
 /*vex-vision-config:end*/
 
