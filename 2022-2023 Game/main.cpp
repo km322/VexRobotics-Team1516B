@@ -162,14 +162,13 @@ void autonomous(void) {
 
 void usercontrol(void){
   // Setting the speeds and defining the variables
-  int count = 0, axis3 = 0, axis4 = 0, axis1 = 0, X1 = 0, X2 = 0, Y1 = 0;
-
+  int count = 0, axis3 = 0, axis4 = 0, axis1 = 0, X1 = 0, X2 = 0, Y1 = 0, c = 0;
+  Controller.Screen.print("Color: Blue");
   Intake.setVelocity(100, percent);
   Roller.setVelocity(100, percent);
   Flywheel1.setVelocity(100, percent);
   Flywheel2.setVelocity(100, percent);
   while (1){
-
     digital_out pneum = digital_out( Brain.ThreeWirePort.A);
     if(Controller.ButtonRight.pressing()) {
       pneum.set( true );
@@ -211,17 +210,35 @@ void usercontrol(void){
     }
 
     //Roller Controls
+    if (Controller.ButtonY.pressing()&&c%2==0){
+      c += 1;
+      Controller.Screen.print("Color: Red");
+      this_thread::sleep_for(1000);
+    }
+    else{
+     if (Controller.ButtonY.pressing()&&c%2==1){
+      c += 1;
+      Controller.Screen.print("Color: Blue");
+      this_thread::sleep_for(1000);
+      }
+    }
+
     if (Controller.ButtonL1.pressing() ) {
       Roller.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
     }
     else if (Controller.ButtonL2.pressing()){
       Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
     }
-    //If nothing is pressed, the rollers will stay stationary
+      //If nothing is pressed, the rollers will stay stationary
     else {
-      Roller.stop(vex::brakeType::brake);
+      VisionSensor.takeSnapshot(Vision11__DISK);
+      if (VisionSensor.largestObject.exists){
+        Roller.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+        }
+      else{
+        Roller.stop(vex::brakeType::brake);
+      }
     }
-
     //Drivertrain Control (This is very scuffed for now, once we test it will be better)
     axis3 = Controller.Axis3.position();
     axis1 = Controller.Axis1.position();
