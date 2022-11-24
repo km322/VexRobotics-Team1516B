@@ -237,7 +237,7 @@ void usercontrol(void){
     else {
       VisionSensor.takeSnapshot(Vision11__DISK);
       if (VisionSensor.largestObject.exists){
-        Roller.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+        Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
         }
       else{
         Roller.stop(vex::brakeType::brake);
@@ -255,6 +255,26 @@ void usercontrol(void){
     RightBack.spin(vex::directionType::fwd,runoff(overFlow(Y1-X2+X1)),vex::velocityUnits::pct);
     LeftFront.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2+X1)),vex::velocityUnits::pct);
     LeftBack.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2-X1)),vex::velocityUnits::pct);
+
+    //Temperature Code
+    
+    // Brain.Screen.clearScreen();
+    // Brain.Screen.setCursor(1, 1);
+    // Brain.Screen.print("Right Front Drivetrain Motor: %.2f% ", RightFront.temperature(fahrenheit));
+    // Brain.Screen.setCursor(2, 1);
+    // Brain.Screen.print("Left Front Drivetrain Motor: %.2f% ", LeftFront.temperature(fahrenheit));
+    // Brain.Screen.setCursor(3, 1);
+    // Brain.Screen.print("Right Back Drivetrain Motor: %.2f% ", RightBack.temperature(fahrenheit));
+    // Brain.Screen.setCursor(4, 1);
+    // Brain.Screen.print("Left Back Drivetrain Motor: %.2f% ", LeftBack.temperature(fahrenheit));
+    // Brain.Screen.setCursor(5, 1);
+    // Brain.Screen.print("Roller Motor: %.2f% ", Roller.temperature(fahrenheit));
+    // Brain.Screen.setCursor(6, 1);
+    // Brain.Screen.print("Intake Motor: %.2f% ", Intake.temperature(fahrenheit));
+    // Brain.Screen.setCursor(7, 1);
+    // Brain.Screen.print("Flywheel Motor 1: %.2f% ", Flywheel1.temperature(fahrenheit));
+    // Brain.Screen.setCursor(8, 1);
+    // Brain.Screen.print("Flywheel Motor 2: %.2f% ", Flywheel2.temperature(fahrenheit));
     wait(20, msec);
   }
 }
