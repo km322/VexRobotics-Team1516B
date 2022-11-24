@@ -169,6 +169,7 @@ void usercontrol(void){
   Flywheel1.setVelocity(100, percent);
   Flywheel2.setVelocity(100, percent);
   while (1){
+    //Pnuematic Code
     digital_out pneum = digital_out( Brain.ThreeWirePort.A);
     if(Controller.ButtonRight.pressing()) {
       pneum.set( true );
@@ -179,8 +180,7 @@ void usercontrol(void){
     if(Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       pneum1.set( true );
     }
-
-    this_thread::sleep_for(10);
+    
     // Flywheel on and off buttom using A
     if(Controller.ButtonA.pressing()&&count%2==0) {
       Flywheel1.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
@@ -257,7 +257,7 @@ void usercontrol(void){
     LeftBack.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2-X1)),vex::velocityUnits::pct);
 
     //Temperature Code
-    
+
     // Brain.Screen.clearScreen();
     // Brain.Screen.setCursor(1, 1);
     // Brain.Screen.print("Right Front Drivetrain Motor: %.2f% ", RightFront.temperature(fahrenheit));
