@@ -118,52 +118,36 @@ void autonomous(void) {
   RightFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
   RightBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
   wait(2,seconds);
-  Roller.startRotateFor(vex::directionType::rev, 400, vex::rotationUnits::deg);
+  while (true){
+    VisionSensor.takeSnapshot(Vision11__GEAR);
+    if (VisionSensor.largestObject.exists){
+      Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+    }
+    else{
+      break;
+    }
+    wait(10, msec);
+  }
   wait(2,seconds);
-
-  // ..........................................................................
-  // autonomous for further side rollers
-  // ..........................................................................
-  // sliding
-  // LeftBack.startRotateFor(vex::directionType::fwd, 50, vex::rotationUnits::deg);
-  // LeftFront.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
-  // RightFront.startRotateFor(vex::directionType::fwd, 50, vex::rotationUnits::deg);
-  // RightBack.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
-  // wait(0.5,seconds);
-  // //going backwards
-  // LeftBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  // LeftFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  // RightFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  // RightBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  // wait(0.75,seconds);
-  // //fly wheel and roller
-  // Roller.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
-  // wait(2,seconds);
-  // Flywheel1.startRotateFor(vex::directionType::fwd, 10000, vex::rotationUnits::deg);
-  // Flywheel2.startRotateFor(vex::directionType::fwd, 10000, vex::rotationUnits::deg);
-  // //going back forward to the line 
-  // LeftBack.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
-  // LeftFront.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
-  // RightFront.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
-  // RightBack.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
-  // wait(1,seconds);
-  // //turning a bit getting into position for shooting
-  // LeftFront.startRotateFor(vex::directionType::fwd, 12, vex::rotationUnits::deg);
-  // LeftBack.startRotateFor(vex::directionType::fwd, 12, vex::rotationUnits::deg);
-  // wait(0.12,seconds);
-  // ///shooting
-  // for (int i = 0; i < 2; i++){
-  //   pneum.set( true );
-  //   wait(0.2,seconds);
-  //   pneum.set( false );
-  //   wait(0.1,seconds);
-  // }
+  Flywheel1.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
+  Flywheel2.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
+  wait(2,seconds);
+  pneum.set( true );
+  wait(.5,seconds);
+  pneum.set( false );
+  wait(2, seconds);
+  pneum.set( true );
+  wait(.5,seconds);
+  pneum.set( false );
+  wait(.5, seconds);
+  Flywheel1.stop(vex::brakeType::coast);
+  Flywheel2.stop(vex::brakeType::coast);
 }
 
 void usercontrol(void){
   // Setting the speeds and defining the variables
-  int count = 0, axis3 = 0, axis4 = 0, axis1 = 0, X1 = 0, X2 = 0, Y1 = 0, c = 0;
-  Controller.Screen.print("Color: Blue");
+  int count = 0, axis3 = 0, axis4 = 0, axis1 = 0, X1 = 0, X2 = 0, Y1 = 0, c = 1;
+  Controller.Screen.print("Color: Red");
   Intake.setVelocity(100, percent);
   Roller.setVelocity(100, percent);
   Flywheel1.setVelocity(100, percent);
@@ -235,12 +219,23 @@ void usercontrol(void){
     }
       //If nothing is pressed, the rollers will stay stationary
     else {
-      VisionSensor.takeSnapshot(Vision11__DISK);
-      if (VisionSensor.largestObject.exists){
-        Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+      if(c%2==1){
+        VisionSensor.takeSnapshot(Vision11__DISK);
+        if (VisionSensor.largestObject.exists){
+          Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+          }
+        else{
+          Roller.stop(vex::brakeType::brake);
         }
-      else{
-        Roller.stop(vex::brakeType::brake);
+      }
+      else if (c%2==0){
+        VisionSensor.takeSnapshot(Vision11__GEAR);
+        if (VisionSensor.largestObject.exists){
+          Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+          }
+        else{
+          Roller.stop(vex::brakeType::brake);
+        }
       }
     }
     //Drivertrain Control (This is very scuffed for now, once we test it will be better)
@@ -260,21 +255,21 @@ void usercontrol(void){
 
     // Brain.Screen.clearScreen();
     // Brain.Screen.setCursor(1, 1);
-    // Brain.Screen.print("Right Front Drivetrain Motor: %.2f% ", RightFront.temperature(fahrenheit));
+    // Brain.Screen.print("Right Front Drivetrain Motor: %.2f% ", RightFront.temperature(celsius));
     // Brain.Screen.setCursor(2, 1);
-    // Brain.Screen.print("Left Front Drivetrain Motor: %.2f% ", LeftFront.temperature(fahrenheit));
+    // Brain.Screen.print("Left Front Drivetrain Motor: %.2f% ", LeftFront.temperature(celsius));
     // Brain.Screen.setCursor(3, 1);
-    // Brain.Screen.print("Right Back Drivetrain Motor: %.2f% ", RightBack.temperature(fahrenheit));
+    // Brain.Screen.print("Right Back Drivetrain Motor: %.2f% ", RightBack.temperature(celsius));
     // Brain.Screen.setCursor(4, 1);
-    // Brain.Screen.print("Left Back Drivetrain Motor: %.2f% ", LeftBack.temperature(fahrenheit));
+    // Brain.Screen.print("Left Back Drivetrain Motor: %.2f% ", LeftBack.temperature(celsius));
     // Brain.Screen.setCursor(5, 1);
-    // Brain.Screen.print("Roller Motor: %.2f% ", Roller.temperature(fahrenheit));
+    // Brain.Screen.print("Roller Motor: %.2f% ", Roller.temperature(celsius));
     // Brain.Screen.setCursor(6, 1);
-    // Brain.Screen.print("Intake Motor: %.2f% ", Intake.temperature(fahrenheit));
+    // Brain.Screen.print("Intake Motor: %.2f% ", Intake.temperature(celsius));
     // Brain.Screen.setCursor(7, 1);
-    // Brain.Screen.print("Flywheel Motor 1: %.2f% ", Flywheel1.temperature(fahrenheit));
+    // Brain.Screen.print("Flywheel Motor 1: %.2f% ", Flywheel1.temperature(celsius));
     // Brain.Screen.setCursor(8, 1);
-    // Brain.Screen.print("Flywheel Motor 2: %.2f% ", Flywheel2.temperature(fahrenheit));
+    // Brain.Screen.print("Flywheel Motor 2: %.2f% ", Flywheel2.temperature(celsius));
     wait(20, msec);
   }
 }
