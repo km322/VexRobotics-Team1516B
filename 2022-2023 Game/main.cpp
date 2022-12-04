@@ -11,6 +11,8 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // Vision11             vision        11              
+// DigitalOutA          digital_out   A               
+// DigitalOutB          digital_out   B               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -103,13 +105,9 @@ void autonomous(void) {
   RightFront.setVelocity(100, percent);
   RightBack.setVelocity(100, percent);
 
-  //something that fixes the error
-  digital_out pneum = digital_out( Brain.ThreeWirePort.A);
-  digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
-
   //settting state of pneumatics
-  pneum1.set(false);
-  pneum.set(false);
+  DigitalOutB.set(false);
+  DigitalOutA.set(false);
 
   //[motor name].startRotateFor(vex::directionType::[fwd/rev],[degree of rotation (one full roatation = 360)] vex::rotationUnits::deg)
   //going backwards and rolling roller
@@ -132,13 +130,13 @@ void autonomous(void) {
   Flywheel1.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
   Flywheel2.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
   wait(2,seconds);
-  pneum.set( true );
+  DigitalOutA.set( true );
   wait(.5,seconds);
-  pneum.set( false );
+  DigitalOutA.set( false );
   wait(2, seconds);
-  pneum.set( true );
+  DigitalOutA.set( true );
   wait(.5,seconds);
-  pneum.set( false );
+  DigitalOutA.set( false );
   wait(.5, seconds);
   Flywheel1.stop(vex::brakeType::coast);
   Flywheel2.stop(vex::brakeType::coast);
@@ -154,15 +152,13 @@ void usercontrol(void){
   Flywheel2.setVelocity(100, percent);
   while (1){
     //Pnuematic Code
-    digital_out pneum = digital_out( Brain.ThreeWirePort.A);
     if(Controller.ButtonRight.pressing()) {
-      pneum.set( true );
+      DigitalOutA.set( true );
       this_thread::sleep_for(200);
-      pneum.set( false );
+      DigitalOutA.set( false );
     }
-    digital_out pneum1 = digital_out( Brain.ThreeWirePort.B);
     if(Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
-      pneum1.set( true );
+      DigitalOutB.set( true );
     }
     
     // Flywheel on and off buttom using A
@@ -238,7 +234,7 @@ void usercontrol(void){
         }
       }
     }
-    //Drivertrain Control (This is very scuffed for now, once we test it will be better)
+    //Drivertrain Control
     axis3 = Controller.Axis3.position();
     axis1 = Controller.Axis1.position();
     axis4 = Controller.Axis4.position();
