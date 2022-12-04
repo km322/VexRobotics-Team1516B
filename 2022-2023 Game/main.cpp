@@ -56,9 +56,6 @@ int overFlow(int input){
   return input;
 }
 
-int average(int input1, int input2){
-  return (input1+input2)/2;
-}
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
