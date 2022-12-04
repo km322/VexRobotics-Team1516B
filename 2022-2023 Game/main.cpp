@@ -7,6 +7,36 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+/*
+                          oooo$$$$$$$$$$$$oooo
+                      oo$$$$$$$$$$$$$$$$$$$$$$$$o
+                   oo$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$o         o$   $$ o$
+   o $ oo        o$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$o       $$ $$ $$o$
+oo $ $ "$      o$$$$$$$$$    $$$$$$$$$$$$$    $$$$$$$$$o       $$$o$$o$
+"$$$$$$o$     o$$$$$$$$$      $$$$$$$$$$$      $$$$$$$$$$o    $$$$$$$$
+  $$$$$$$    $$$$$$$$$$$      $$$$$$$$$$$      $$$$$$$$$$$$$$$$$$$$$$$
+  $$$$$$$$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$    $$$$$$$$$$$$$$  """$$$
+   "$$$""""$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     "$$$
+    $$$   o$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     "$$$o
+   o$$"   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$       $$$o
+   $$$    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" "$$$$$$ooooo$$$$o
+  o$$$oooo$$$$$  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$   o$$$$$$$$$$$$$$$$$
+  $$$$$$$$"$$$$   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$""""""""
+ """"       $$$$    "$$$$$$$$$$$$$$$$$$$$$$$$$$$$"      o$$$
+            "$$$o     """$$$$$$$$$$$$$$$$$$"$$"         $$$
+              $$$o          "$$""$$$$$$""""           o$$$
+               $$$$o                 oo             o$$$"
+                "$$$$o      o$$$$$$o"$$$$o        o$$$$
+                  "$$$$$oo     ""$$$$o$$$$$o   o$$$$""  
+                     ""$$$$$oooo  "$$$o$$$$$$$$$"""
+                        ""$$$$$$$oo $$$$$$$$$$       
+                                """"$$$$$$$$$$$        
+                                    $$$$$$$$$$$$       
+                                     $$$$$$$$$$"      
+                                      "$$$""""
+*/
+
+
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
@@ -104,11 +134,11 @@ void autonomous(void) {
   RightFront.setVelocity(100, percent);
   RightBack.setVelocity(100, percent);
 
-  //settting state of pneumatics
+  //settting state of pneumatics at the start of auton period
   DigitalOutB.set(false);
   DigitalOutA.set(false);
 
-  //[motor name].startRotateFor(vex::directionType::[fwd/rev],[degree of rotation (one full roatation = 360)] vex::rotationUnits::deg)
+  //[motor name].startRotateFor - (vex::directionType::[fwd/rev],[degree of rotation - (one full roatation = 360)] vex::rotationUnits::deg)
   //going backwards and rolling roller
   LeftBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
   LeftFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
@@ -132,10 +162,13 @@ void autonomous(void) {
   //wait for above action to finish
   wait(2,seconds);
   //start flywheels
+
   Flywheel1.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
   Flywheel2.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
   wait(2,seconds);
+
   //start pnuematics two times to shoot two discs
+
   DigitalOutA.set( true );
   wait(.5,seconds);
   DigitalOutA.set( false );
@@ -144,12 +177,14 @@ void autonomous(void) {
   wait(.5,seconds);
   DigitalOutA.set( false );
   wait(.5, seconds);
+
   //coast = allow motor to slow down itself
   Flywheel1.stop(vex::brakeType::coast);
   Flywheel2.stop(vex::brakeType::coast);
 }
 
 void usercontrol(void){
+
   // Setting the speeds and defining the variables
   int axis3 = 0, axis4 = 0, axis1 = 0;
   bool flywheel = true, color1 = false;
@@ -159,7 +194,7 @@ void usercontrol(void){
   Flywheel1.setVelocity(100, percent);
   Flywheel2.setVelocity(100, percent);
   while (1){
-    //Pnuematic Code
+    //Pnuematic Code goes under here:
     //if right button is pressed pnuematic A activates and deactivates
     if(Controller.ButtonRight.pressing()) {
       DigitalOutA.set( true );
@@ -187,7 +222,7 @@ void usercontrol(void){
       }
     }
 
-    //Intake Controls
+    //Intake Controls: Checks pressed buttons
     if (Controller.ButtonR1.pressing() ) {
       Intake.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
     }
@@ -250,7 +285,7 @@ void usercontrol(void){
     axis3 = Controller.Axis3.position();
     axis1 = Controller.Axis1.position();
     axis4 = Controller.Axis4.position();
-  
+
     RightFront.spin(vex::directionType::fwd, runoff(overFlow(axis3-axis1-axis4)),vex::velocityUnits::pct);
     RightBack.spin(vex::directionType::fwd,runoff(overFlow(axis3-axis1+axis4)),vex::velocityUnits::pct);
     LeftFront.spin(vex::directionType::fwd,runoff(overFlow(axis3+axis1+axis4)),vex::velocityUnits::pct);
