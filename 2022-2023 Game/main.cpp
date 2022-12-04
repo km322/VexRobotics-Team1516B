@@ -17,26 +17,28 @@
 
 #include "vex.h"
 
-
 using namespace vex;
 
 // A global instance of competition
 competition Competition;
 
-
-vex::motor  Intake = vex::motor( vex:: PORT10);
+// define motors with ports
+// true = reversed
+vex::motor  Intake = vex::motor( vex:: PORT3);
 vex::motor  Roller = vex::motor( vex:: PORT2, true);
 vex::motor  Flywheel1 = vex::motor( vex:: PORT15);
 vex::motor  Flywheel2 = vex::motor( vex:: PORT16, true);
 vex::motor  RightBack = vex::motor(vex::PORT1);
 vex::motor  RightFront = vex::motor(vex::PORT8);
-vex::motor  LeftBack = vex::motor(vex::PORT3, true);
+vex::motor  LeftBack = vex::motor(vex::PORT10, true);
 vex::motor  LeftFront = vex::motor(vex::PORT18, true);
+
 vex::vision VisionSensor (vex::PORT11);
 
 //Setting up the controller
 vex::controller Controller = vex::controller();
 
+//prevent going above or below 100
 int runoff(int parameter) {
   if (parameter > 100){
     parameter = 100;
@@ -47,10 +49,9 @@ int runoff(int parameter) {
   return parameter;
 }
 
+//prevent deadzone
 int overFlow(int input){
-  if (input < 30 && input > 0){
-    input = 0;
-  } else if (input > -30 && input < 0){
+  if (input < 20 && input > -20){
     input = 0;
   }
   return input;
@@ -93,6 +94,7 @@ void autonomous(void) {
   // autonomous for closer to human field
   // ..........................................................................
   //set velocity percentage of motors
+  //set all motor to 100 percent (default is not)
   Intake.setVelocity(100, percent);
   Roller.setVelocity(100, percent);
   Flywheel1.setVelocity(100, percent);
@@ -112,21 +114,28 @@ void autonomous(void) {
   LeftFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
   RightFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
   RightBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
+  //wait for above action to finish
   wait(2,seconds);
+  //vision sensor time
   while (true){
     VisionSensor.takeSnapshot(Vision11__GEAR);
+    //if .takeSnapshot(color) (in robot-config) exists
     if (VisionSensor.largestObject.exists){
       Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
     }
     else{
       break;
     }
+    //take picture every 10 msec
     wait(10, msec);
   }
+  //wait for above action to finish
   wait(2,seconds);
+  //start flywheels
   Flywheel1.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
   Flywheel2.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
   wait(2,seconds);
+  //start pnuematics two times to shoot two discs
   DigitalOutA.set( true );
   wait(.5,seconds);
   DigitalOutA.set( false );
@@ -135,13 +144,15 @@ void autonomous(void) {
   wait(.5,seconds);
   DigitalOutA.set( false );
   wait(.5, seconds);
+  //coast = allow motor to slow down itself
   Flywheel1.stop(vex::brakeType::coast);
   Flywheel2.stop(vex::brakeType::coast);
 }
 
 void usercontrol(void){
   // Setting the speeds and defining the variables
-  int count = 0, axis3 = 0, axis4 = 0, axis1 = 0, X1 = 0, X2 = 0, Y1 = 0, c = 1;
+  int axis3 = 0, axis4 = 0, axis1 = 0;
+  bool flywheel = true, color1 = false;
   Controller.Screen.print("Color: Red");
   Intake.setVelocity(100, percent);
   Roller.setVelocity(100, percent);
@@ -149,27 +160,29 @@ void usercontrol(void){
   Flywheel2.setVelocity(100, percent);
   while (1){
     //Pnuematic Code
+    //if right button is pressed pnuematic A activates and deactivates
     if(Controller.ButtonRight.pressing()) {
       DigitalOutA.set( true );
       this_thread::sleep_for(200);
       DigitalOutA.set( false );
     }
+    //if left button is pressed pnuematic B activates
     if(Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
       DigitalOutB.set( true );
     }
     
     // Flywheel on and off buttom using A
-    if(Controller.ButtonA.pressing()&&count%2==0) {
+    if(Controller.ButtonA.pressing()&&flywheel) {
       Flywheel1.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
       Flywheel2.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
-      count +=1;
+      flywheel = false;
       this_thread::sleep_for(200);
     }
     else {
-      if(Controller.ButtonA.pressing()&&count%2==1){
+      if(Controller.ButtonA.pressing()&&!flywheel){
         Flywheel1.stop(vex::brakeType::coast);
         Flywheel2.stop(vex::brakeType::coast);
-        count+=1;
+        flywheel = true;
         this_thread::sleep_for(200);
       }
     }
@@ -187,32 +200,34 @@ void usercontrol(void){
     }
 
     //Roller Controls
-    if (Controller.ButtonY.pressing()&&c%2==0){
+    if (Controller.ButtonY.pressing()&&color1){
       Controller.Screen.clearLine(3);
       Controller.Screen.setCursor(3,1);
-      c += 1;
+      color1 = false;
       Controller.Screen.print("Color: Red");
       this_thread::sleep_for(200);
     }
+    //Outputs the current color checked by the vision sensor
     else{
-     if (Controller.ButtonY.pressing()&&c%2==1){
+     if (Controller.ButtonY.pressing()&&!color1){
       Controller.Screen.clearLine(3);
       Controller.Screen.setCursor(3,1);
-      c += 1;
+      color1 = true;
       Controller.Screen.print("Color: Blue");
       this_thread::sleep_for(200);
       }
     }
 
+    //spin roller manually
     if (Controller.ButtonL1.pressing() ) {
       Roller.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
     }
     else if (Controller.ButtonL2.pressing()){
       Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
     }
-      //If nothing is pressed, the rollers will stay stationary
+    //If nothing is pressed, the rollers will stay stationary and vision sensor will do its job
     else {
-      if(c%2==1){
+      if(color1){
         VisionSensor.takeSnapshot(Vision11__DISK);
         if (VisionSensor.largestObject.exists){
           Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
@@ -221,7 +236,7 @@ void usercontrol(void){
           Roller.stop(vex::brakeType::brake);
         }
       }
-      else if (c%2==0){
+      else if (!color1){
         VisionSensor.takeSnapshot(Vision11__GEAR);
         if (VisionSensor.largestObject.exists){
           Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
@@ -235,14 +250,11 @@ void usercontrol(void){
     axis3 = Controller.Axis3.position();
     axis1 = Controller.Axis1.position();
     axis4 = Controller.Axis4.position();
-    Y1=axis3;
-    X1=axis4;
-    X2=axis1;
-
-    RightFront.spin(vex::directionType::fwd, runoff(overFlow(Y1-X2-X1)),vex::velocityUnits::pct);
-    RightBack.spin(vex::directionType::fwd,runoff(overFlow(Y1-X2+X1)),vex::velocityUnits::pct);
-    LeftFront.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2+X1)),vex::velocityUnits::pct);
-    LeftBack.spin(vex::directionType::fwd,runoff(overFlow(Y1+X2-X1)),vex::velocityUnits::pct);
+  
+    RightFront.spin(vex::directionType::fwd, runoff(overFlow(axis3-axis1-axis4)),vex::velocityUnits::pct);
+    RightBack.spin(vex::directionType::fwd,runoff(overFlow(axis3-axis1+axis4)),vex::velocityUnits::pct);
+    LeftFront.spin(vex::directionType::fwd,runoff(overFlow(axis3+axis1+axis4)),vex::velocityUnits::pct);
+    LeftBack.spin(vex::directionType::fwd,runoff(overFlow(axis3+axis1-axis4)),vex::velocityUnits::pct);
 
     //Temperature Code
 
