@@ -13,6 +13,8 @@ signature Vision11__DISK = signature (1, 3421, 4127, 3774, -6007, -5461, -5734, 
 signature Vision11__GEAR = signature (2, 11431, 13893, 12662, -1445, -511, -978, 3, 0);
 vision Vision11 = vision (PORT11, 50, Vision11__DISK, Vision11__GEAR);
 /*vex-vision-config:end*/
+digital_out DigitalOutA = digital_out(Brain.ThreeWirePort.A);
+digital_out DigitalOutB = digital_out(Brain.ThreeWirePort.B);
 
 // VEXcode generated functions
 
