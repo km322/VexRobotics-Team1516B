@@ -54,14 +54,14 @@ competition Competition;
 
 // define motors with ports
 // true = reversed
-vex::motor  Intake = vex::motor( vex:: PORT3);
-vex::motor  Roller = vex::motor( vex:: PORT2, true);
-vex::motor  Flywheel1 = vex::motor( vex:: PORT15);
-vex::motor  Flywheel2 = vex::motor( vex:: PORT16, true);
-vex::motor  RightBack = vex::motor(vex::PORT1);
-vex::motor  RightFront = vex::motor(vex::PORT8);
-vex::motor  LeftBack = vex::motor(vex::PORT10, true);
-vex::motor  LeftFront = vex::motor(vex::PORT18, true);
+vex::motor  Intake = vex::motor( vex:: PORT3, ratio18_1);
+vex::motor  Roller = vex::motor( vex:: PORT2, ratio36_1, true);
+vex::motor  Flywheel1 = vex::motor( vex:: PORT15, ratio6_1);
+vex::motor  Flywheel2 = vex::motor( vex:: PORT16, ratio6_1, true);
+vex::motor  RightBack = vex::motor(vex::PORT1, ratio18_1);
+vex::motor  RightFront = vex::motor(vex::PORT8, ratio18_1);
+vex::motor  LeftBack = vex::motor(vex::PORT10, ratio18_1, true);
+vex::motor  LeftFront = vex::motor(vex::PORT18, ratio18_1, true);
 
 vex::vision VisionSensor (vex::PORT11);
 
