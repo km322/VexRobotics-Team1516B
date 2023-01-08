@@ -126,14 +126,14 @@ void autonomous(void) {
   // ..........................................................................
   //set velocity percentage of motors
   //set all motor to 100 percent (default is not)
-  Intake.setVelocity(100, percent);
-  Roller.setVelocity(100, percent);
-  Flywheel1.setVelocity(100, percent);
-  Flywheel2.setVelocity(100, percent);
-  LeftBack.setVelocity(100, percent);
-  LeftFront.setVelocity(100, percent);
-  RightFront.setVelocity(100, percent);
-  RightBack.setVelocity(100, percent);
+  Intake.setVelocity(127, percent);
+  Roller.setVelocity(127, percent);
+  Flywheel1.setVelocity(127, percent);
+  Flywheel2.setVelocity(127, percent);
+  LeftBack.setVelocity(127, percent);
+  LeftFront.setVelocity(127, percent);
+  RightFront.setVelocity(127, percent);
+  RightBack.setVelocity(127, percent);
 
   //settting state of pneumatics at the start of auton period
   DigitalOutB.set(false);
@@ -164,8 +164,8 @@ void autonomous(void) {
   wait(2,seconds);
   //start flywheels
 
-  Flywheel1.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
-  Flywheel2.startRotateFor(vex::directionType::rev, 4000, vex::rotationUnits::deg);
+  Flywheel1.startRotateFor(vex::directionType::rev, 10000, vex::rotationUnits::deg);
+  Flywheel2.startRotateFor(vex::directionType::rev, 10000, vex::rotationUnits::deg);
   wait(2,seconds);
 
   //start pnuematics two times to shoot two discs
@@ -187,14 +187,14 @@ void autonomous(void) {
 void usercontrol(void){
 
   // Setting the speeds and defining the variables
-  int axis3 = 0, axis4 = 0, axis1 = 0, flyspeed = 100;
+  int axis3 = 0, axis4 = 0, axis1 = 0, flyspeed = 127;
   bool flywheel = true, color1 = false;
   std::string col = "Red";
   Controller.Screen.print("Col: %s - Spd: %d", col.c_str() , flyspeed);
-  Intake.setVelocity(100, percent);
-  Roller.setVelocity(100, percent);
-  Flywheel1.setVelocity(100, percent);
-  Flywheel2.setVelocity(100, percent);
+  Intake.setVelocity(127, percent);
+  Roller.setVelocity(127, percent);
+  Flywheel1.setVelocity(127, percent);
+  Flywheel2.setVelocity(127, percent);
   while (1){
     //Pnuematic Code goes under here:
     //if right button is pressed pnuematic A activates and deactivates
@@ -212,8 +212,8 @@ void usercontrol(void){
     if (Controller.ButtonUp.pressing()){
       Controller.Screen.clearLine(3);
       Controller.Screen.setCursor(3,1);
-      if (flyspeed >= 100){
-        flyspeed = 100;
+      if (flyspeed >= 127){
+        flyspeed = 127;
       }
       else {
         flyspeed += 10;
@@ -255,10 +255,10 @@ void usercontrol(void){
 
     //Intake Controls: Checks pressed buttons
     if (Controller.ButtonR1.pressing() ) {
-      Intake.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+      Intake.spin(vex::directionType::fwd, 127, vex::velocityUnits::pct);
     }
     else if (Controller.ButtonR2.pressing()){
-      Intake.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+      Intake.spin(vex::directionType::rev, 127, vex::velocityUnits::pct);
     }
     //If nothing is pressed, the intakes will stay stationary
     else {
@@ -288,10 +288,10 @@ void usercontrol(void){
 
     //spin roller manually
     if (Controller.ButtonL1.pressing() ) {
-      Roller.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
+      Roller.spin(vex::directionType::fwd, 127, vex::velocityUnits::pct);
     }
     else if (Controller.ButtonL2.pressing()){
-      Roller.spin(vex::directionType::rev, 100, vex::velocityUnits::pct);
+      Roller.spin(vex::directionType::rev, 127, vex::velocityUnits::pct);
     }
     //If nothing is pressed, the rollers will stay stationary and vision sensor will do its job
     else {
