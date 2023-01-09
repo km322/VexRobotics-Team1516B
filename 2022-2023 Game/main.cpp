@@ -128,8 +128,8 @@ void autonomous(void) {
   //set all motor to 100 percent (default is not)
   Intake.setVelocity(127, percent);
   Roller.setVelocity(127, percent);
-  Flywheel1.setVelocity(127, percent);
-  Flywheel2.setVelocity(127, percent);
+  Flywheel1.setVelocity(100, percent);
+  Flywheel2.setVelocity(100, percent);
   LeftBack.setVelocity(127, percent);
   LeftFront.setVelocity(127, percent);
   RightFront.setVelocity(127, percent);
@@ -141,32 +141,29 @@ void autonomous(void) {
 
   //[motor name].startRotateFor - (vex::directionType::[fwd/rev],[degree of rotation - (one full roatation = 360)] vex::rotationUnits::deg)
   //going backwards and rolling roller
-  LeftBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
-  LeftFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
+  // LeftBack.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  // LeftFront.startRotateFor(vex::directionType::fwd, 750, vex::rotationUnits::deg);
+  // RightFront.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  // RightBack.startRotateFor(vex::directionType::fwd, 750, vex::rotationUnits::deg);
+  // wait(3,seconds);
+  LeftBack.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
   //wait for above action to finish
   wait(2,seconds);
   //vision sensor time
-  while (true){
-    VisionSensor.takeSnapshot(Vision11__RED1);
-    //if .takeSnapshot(color) (in robot-config) exists
-    if (VisionSensor.largestObject.exists){
-      Roller.spin(vex::directionType::fwd, 100, vex::velocityUnits::pct);
-    }
-    else{
-      break;
-    }
-    //take picture every 10 msec
-    wait(10, msec);
-  }
+  Roller.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
   //wait for above action to finish
-  wait(2,seconds);
+  wait(1,seconds);
   //start flywheels
-
-  Flywheel1.startRotateFor(vex::directionType::rev, 10000, vex::rotationUnits::deg);
-  Flywheel2.startRotateFor(vex::directionType::rev, 10000, vex::rotationUnits::deg);
-  wait(2,seconds);
+  LeftFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::fwd, 75, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::fwd, 75, vex::rotationUnits::deg);
+  Flywheel1.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
+  Flywheel2.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
+  wait(3,seconds);
 
   //start pnuematics two times to shoot two discs
 
@@ -187,7 +184,7 @@ void autonomous(void) {
 void usercontrol(void){
 
   // Setting the speeds and defining the variables
-  int axis3 = 0, axis4 = 0, axis1 = 0, flyspeed = 127;
+  int axis3 = 0, axis4 = 0, axis1 = 0, flyspeed = 100;
   bool flywheel = true, color1 = false;
   std::string col = "Red";
   Controller.Screen.print("Col: %s - Spd: %d", col.c_str() , flyspeed);
@@ -212,7 +209,7 @@ void usercontrol(void){
     if (Controller.ButtonUp.pressing()){
       Controller.Screen.clearLine(3);
       Controller.Screen.setCursor(3,1);
-      if (flyspeed >= 127){
+      if (flyspeed >=100){
         flyspeed = 127;
       }
       else {
