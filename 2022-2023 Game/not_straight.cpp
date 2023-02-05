@@ -156,10 +156,10 @@ void autonomous(void) {
   Roller.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
   //wait for above action to finish
   wait(1,seconds);
-  LeftBack.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
-  LeftFront.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
   wait(2,seconds);
   //start flywheels
   LeftFront.startRotateFor(vex::directionType::rev, 150, vex::rotationUnits::deg);
