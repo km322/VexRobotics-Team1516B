@@ -141,11 +141,11 @@ void autonomous(void) {
 
   //[motor name].startRotateFor - (vex::directionType::[fwd/rev],[degree of rotation - (one full roatation = 360)] vex::rotationUnits::deg)
   //going backwards and rolling roller
-  // LeftBack.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
-  // LeftFront.startRotateFor(vex::directionType::fwd, 750, vex::rotationUnits::deg);
-  // RightFront.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
-  // RightBack.startRotateFor(vex::directionType::fwd, 750, vex::rotationUnits::deg);
-  // wait(3,seconds);
+  LeftBack.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::fwd, 750, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::fwd, 750, vex::rotationUnits::deg);
+  wait(3,seconds);
   LeftBack.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
   LeftFront.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
   RightFront.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
@@ -162,10 +162,10 @@ void autonomous(void) {
   RightBack.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
   wait(2,seconds);
   //start flywheels
-  LeftFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::fwd, 75, vex::rotationUnits::deg);
-  LeftBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::fwd, 75, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::rev, 150, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::fwd, 150, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::rev, 150, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::fwd, 150, vex::rotationUnits::deg);
   Flywheel1.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
   Flywheel2.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
   wait(3,seconds);
