@@ -128,8 +128,8 @@ void autonomous(void) {
   //set all motor to 100 percent (default is not)
   Intake.setVelocity(127, percent);
   Roller.setVelocity(127, percent);
-  Flywheel1.setVelocity(100, percent);
-  Flywheel2.setVelocity(100, percent);
+  Flywheel1.setVelocity(95, percent);
+  Flywheel2.setVelocity(95, percent);
   LeftBack.setVelocity(127, percent);
   LeftFront.setVelocity(127, percent);
   RightFront.setVelocity(127, percent);
@@ -157,7 +157,7 @@ void autonomous(void) {
   RightFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
   RightBack.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
   //vision sensor time
-  Roller.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
+  Roller.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
   //wait for above action to finish
   wait(1,seconds);
   LeftBack.startRotateFor(vex::directionType::fwd, 150, vex::rotationUnits::deg);
@@ -166,10 +166,10 @@ void autonomous(void) {
   RightBack.startRotateFor(vex::directionType::fwd, 150, vex::rotationUnits::deg);
   wait(2,seconds);
   //start flywheels
-  LeftFront.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::fwd, 75, vex::rotationUnits::deg);
-  LeftBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::fwd, 75, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::fwd, 50, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::fwd, 50, vex::rotationUnits::deg);
   Flywheel1.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
   Flywheel2.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
   wait(3,seconds);
