@@ -128,8 +128,8 @@
     //set all motor to 100 percent (default is not)
     Intake.setVelocity(127, percent);
     Roller.setVelocity(127, percent);
-    Flywheel1.setVelocity(100, percent);
-    Flywheel2.setVelocity(100, percent);
+    Flywheel1.setVelocity(95, percent);
+    Flywheel2.setVelocity(95, percent);
     LeftBack.setVelocity(127, percent);
     LeftFront.setVelocity(127, percent);
     RightFront.setVelocity(127, percent);
