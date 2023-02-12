@@ -162,10 +162,10 @@ void autonomous(void) {
   RightBack.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
   wait(2,seconds);
   //start flywheels
-  LeftFront.startRotateFor(vex::directionType::rev, 150, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::fwd, 150, vex::rotationUnits::deg);
-  LeftBack.startRotateFor(vex::directionType::rev, 150, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::fwd, 150, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::fwd, 150, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::rev, 150, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::fwd, 150, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::rev, 150, vex::rotationUnits::deg);
   Flywheel1.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
   Flywheel2.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
   wait(3,seconds);
