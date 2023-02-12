@@ -141,17 +141,17 @@ void autonomous(void) {
 
   //[motor name].startRotateFor - (vex::directionType::[fwd/rev],[degree of rotation - (one full roatation = 360)] vex::rotationUnits::deg)
   //going backwards and rolling roller
-  LeftBack.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
-  LeftFront.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  //LeftBack.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  //LeftFront.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  //RightFront.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
+  //RightBack.startRotateFor(vex::directionType::rev, 750, vex::rotationUnits::deg);
   // wait(3,seconds);
-  LeftBack.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
-  LeftFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
+  //LeftBack.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
+  //LeftFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
+  //RightFront.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
+  //RightBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
   //wait for above action to finish
-  wait(2,seconds);
+  //wait(2,seconds);
   LeftBack.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
   LeftFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
   RightFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
