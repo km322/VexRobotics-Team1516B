@@ -146,26 +146,26 @@
     RightFront.startRotateFor(vex::directionType::rev, 500, vex::rotationUnits::deg);
     RightBack.startRotateFor(vex::directionType::rev, 500, vex::rotationUnits::deg);
     wait(3,seconds);
-    LeftFront.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
-  LeftBack.startRotateFor(vex::directionType::fwd, 300, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
-    wait(3,seconds);
+    LeftFront.startRotateFor(vex::directionType::fwd, 450, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::rev, 450, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::fwd, 450, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::rev, 450, vex::rotationUnits::deg);
+    wait(2,seconds);
     LeftBack.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
     LeftFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
     RightFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
     RightBack.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
     //wait for above action to finish
-    wait(2,seconds);
+    wait(1,seconds);
     //vision sensor time
     Roller.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
     //wait for above action to finish
     wait(1,seconds);
-    LeftBack.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
-    LeftFront.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
-    RightFront.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
-    RightBack.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
-    wait(2,seconds);
+    LeftBack.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
+    LeftFront.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
+    RightFront.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
+    RightBack.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
+    wait(.5,seconds);
     //start flywheels
     LeftFront.startRotateFor(vex::directionType::fwd, 50, vex::rotationUnits::deg);
     RightBack.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
@@ -173,7 +173,7 @@
     RightFront.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
     Flywheel1.startRotateFor(vex::directionType::rev, 50000, vex::rotationUnits::deg);
     Flywheel2.startRotateFor(vex::directionType::rev, 50000, vex::rotationUnits::deg);
-    wait(3,seconds);
+    wait(2,seconds);
 
     //start pnuematics two times to shoot two discs
 
