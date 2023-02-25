@@ -219,10 +219,10 @@ void usercontrol(void){
       Controller.Screen.clearLine(3);
       Controller.Screen.setCursor(3,1);
       if (flyspeed >=100){
-        flyspeed = 127;
+        flyspeed = 100;
       }
       else {
-        flyspeed += 10;
+        flyspeed += 5;
       }
 
       Controller.Screen.print("Col: %s - Spd: %d", col.c_str() , flyspeed);
@@ -232,11 +232,11 @@ void usercontrol(void){
     if (Controller.ButtonDown.pressing()){
       Controller.Screen.clearLine(3);
       Controller.Screen.setCursor(3,1);
-      if (flyspeed < 40){
-        flyspeed = 40;
+      if (flyspeed < 70){
+        flyspeed = 70;
       }
       else {
-        flyspeed -= 10;
+        flyspeed -= 5;
       }
 
       Controller.Screen.print("Col: %s - Spd: %d", col.c_str() , flyspeed);
