@@ -186,10 +186,10 @@ void autonomous(void) {
   Flywheel2.stop(vex::brakeType::coast);
   wait(4,seconds);
 
-  LeftFront.startRotateFor(vex::directionType::rev, 450, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::fwd, 450, vex::rotationUnits::deg);
-  LeftBack.startRotateFor(vex::directionType::rev, 450, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::fwd, 450, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::fwd, 600, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::fwd, 600, vex::rotationUnits::deg);
   wait(3,seconds);
 
   DigitalOutB.set( true );
