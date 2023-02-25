@@ -156,6 +156,7 @@ void autonomous(void) {
   LeftFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
   RightFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
   RightBack.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
+  wait(1,seconds);
   //vision sensor time
   Roller.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
   //wait for above action to finish
