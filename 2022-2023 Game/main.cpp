@@ -195,7 +195,7 @@ void usercontrol(void){
 
   // Setting the speeds and defining the variables
   int axis3 = 0, axis4 = 0, axis1 = 0, flyspeed = 100;
-  bool flywheel = true, color1 = false;
+  bool flywheel = true, color1 = false, expansion = true;
   std::string col = "Red";
   Controller.Screen.print("Col: %s - Spd: %d", col.c_str() , flyspeed);
   Intake.setVelocity(127, percent);
@@ -211,9 +211,18 @@ void usercontrol(void){
       DigitalOutA.set( false );
     }
     //if left button is pressed pnuematic B activates
-    if(Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()) {
-      DigitalOutB.set( true );
-    }
+    if(Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()&&expansion) {
+        DigitalOutB.set( true );
+        expansion = false;
+        this_thread::sleep_for(200);
+      }
+      else {
+        if(Controller.ButtonLeft.pressing() && Controller.ButtonDown.pressing()&&!expansion){
+          DigitalOutB.set( false );
+          expansion = true;
+          this_thread::sleep_for(200);
+        }
+      }
     
         //Roller Controls
     if (Controller.ButtonUp.pressing()){
