@@ -152,10 +152,10 @@ void autonomous(void) {
   //RightBack.startRotateFor(vex::directionType::rev, 300, vex::rotationUnits::deg);
   //wait for above action to finish
   //wait(2,seconds);
-  LeftBack.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
-  LeftFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::rev, 100, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::rev, 50, vex::rotationUnits::deg);
   wait(1,seconds);
   //vision sensor time
   Roller.startRotateFor(vex::directionType::fwd, 175, vex::rotationUnits::deg);
