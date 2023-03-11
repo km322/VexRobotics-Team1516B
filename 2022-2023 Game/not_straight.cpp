@@ -158,7 +158,7 @@
     //wait for above action to finish
     wait(1,seconds);
     //vision sensor time
-    Roller.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
+    Roller.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
     //wait for above action to finish
     wait(1,seconds);
     LeftBack.startRotateFor(vex::directionType::fwd, 100, vex::rotationUnits::deg);
