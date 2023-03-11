@@ -166,8 +166,8 @@ void autonomous(void) {
   RightBack.startRotateFor(vex::directionType::fwd, 75, vex::rotationUnits::deg);
   LeftBack.startRotateFor(vex::directionType::rev, 75, vex::rotationUnits::deg);
   RightFront.startRotateFor(vex::directionType::fwd, 75, vex::rotationUnits::deg);
-  Flywheel1.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
-  Flywheel2.startRotateFor(vex::directionType::rev, 20000, vex::rotationUnits::deg);
+  Flywheel1.startRotateFor(vex::directionType::rev, 50000, vex::rotationUnits::deg);
+  Flywheel2.startRotateFor(vex::directionType::rev, 50000, vex::rotationUnits::deg);
   wait(3,seconds);
 
   //start pnuematics two times to shoot two discs
@@ -184,12 +184,12 @@ void autonomous(void) {
   //coast = allow motor to slow down itself
   Flywheel1.stop(vex::brakeType::coast);
   Flywheel2.stop(vex::brakeType::coast);
-  wait(4,seconds);
+  wait(3,seconds);
 
-  LeftFront.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
-  RightBack.startRotateFor(vex::directionType::fwd, 600, vex::rotationUnits::deg);
-  LeftBack.startRotateFor(vex::directionType::rev, 600, vex::rotationUnits::deg);
-  RightFront.startRotateFor(vex::directionType::fwd, 600, vex::rotationUnits::deg);
+  LeftFront.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
+  RightBack.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
+  LeftBack.startRotateFor(vex::directionType::fwd, 200, vex::rotationUnits::deg);
+  RightFront.startRotateFor(vex::directionType::rev, 200, vex::rotationUnits::deg);
   wait(3,seconds);
 
   DigitalOutB.set( true );
